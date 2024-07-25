@@ -145,21 +145,20 @@
 //	}
 //	return 0;
 //}
-int add(int a,int b)
-{
+//int add(int a,int b)
+//{
 //	int z = 0;
 //	z = a + b;
 //	return z;//或者是直接return a+b
-	return (a + b);
-}
-int main()
-{
-	int n1 = 0;
-	int n2 = 0;
-	scanf("%d %d", &n1, &n2);
-	printf("%d\n", add(n1, n2));
-	return 0;
-}
+//}
+//int main()
+//{
+//	int n1 = 0;
+//	int n2 = 0;
+//	scanf("%d %d", &n1, &n2);
+//	printf("%d\n", add(n1, n2));
+//	return 0;
+//}
 //int main()
 //{
 //	int arr[] = { 1,2,3,4,5 };
@@ -172,3 +171,163 @@ int main()
 //	}
 //	return 0;
 //}
+/*int main()
+{
+	char arr1[3] = { '1','2','3'};*///和[]里不填一个效果,产生随机值,[]里面必须输入常量。不能是变量
+/*	char arr2[4] = { '1','2','3' };*///不完全初始化，默认将剩余位置放入0，对应ASCII表的\0，结果为3
+//	printf("%d\n", strlen(arr1));
+//	printf("%d\n", strlen(arr2));
+//	printf("%d\n", '\0');
+//	return 0;
+//}
+//C99标准之前，数组的大小都是用常量或常量表达式来指定
+//int arr1[10]={1,2,3}
+//int arr2[4+6]={1,2,3}一样的
+//C99标准之后，支持变长数组，允许数组的大小是变量，但是这种指定方式的数组是不能初始化的
+//int m = 10;
+//int arr3[m];是ok的
+//但是不能int arr3[m]={1,2,3};
+//
+//求两个数的较大值
+//#include<stdio.h>
+//int max(int a, int b)
+//{
+//	if (a >= b)
+//	{
+//		return a;
+//	}
+//	else
+//		return b;
+//}
+//int main()
+//{
+//	int a, b;
+//	scanf("%d %d", &a, &b);
+//	printf("%d\n", max(a, b));
+//	return 0;
+//}
+//计算y的值
+//#include<stdio.h>
+//int f(int x)
+//{
+//	if ( x < 0)
+//		return 1;
+//	else if (x > 0)
+//		return -1;
+//	else
+//		return 0;
+//	
+//}
+//int x;
+//int main()
+//{
+//	scanf("%d", &x);
+//	printf("%d\n", f(x));
+//	return 0;
+//}
+//int main()
+//{
+//	int a = 7 / 2;
+//	printf("%d\n", a);//输出商
+//	int b = 7 % 2;
+//	printf("%d\n", b);//输出余数，取模操作符两端只能是整数
+//	float c = 7 / 2.0;//除号两端都是整数时执行整数除法，只要有一端是浮点数，则执行浮点数除法
+//	printf("%.2f\n", c);//输出3.50，通过加.1，.2控制位数
+//	return 0;
+//}
+//int main()
+//{
+//	int a = 0;//初始化
+//	a = 20;//赋值
+//	a = a + 20;//等效于a+=20
+//	a = a - 20;//等效于a-=20
+//	return 0;
+//}
+/*int main()
+{
+	int a = 0;*///c语言中0为假，非零为真
+//	if (!a)
+//		printf("hehe");
+//	return 0;
+//}
+//int main()
+//{
+//	int a = 10;
+//	printf("%d\n", sizeof(a));
+//	printf("%d\n", sizeof(int));//输出结果一样,是字节数4，sizeof是单目操作符，不是函数，甚至括号都可以省略（上面那种）
+//	return 0;
+//}
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	printf("%d\n", sizeof arr);
+//	printf("%d\n", sizeof arr[0]);//这里是整型数组，不要把\0混进来
+//	printf("%d\n", sizeof arr/sizeof arr[0]);//计算数组元素个数
+//	return 0;
+//}
+//
+//int main()
+//{
+//	int a = 0;
+///*	int b = a++;*///后置++，先使用a的值，后++
+//	//先b=a，后a=a+1
+//	int b = ++a;//前置++，先++，后使用
+//	//先a=a+1，后b=a
+//	printf("%d\n", a);
+//	printf("%d\n", b);
+//
+//	return 0;
+//}//后置，前置--一个道理
+//int main()
+//{
+//	int a = (int)3.14;//将浮点数3.14强制转化为整型，输出3
+//	printf("%d\n", a);
+//	return 0;
+//}
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+///*	if (a && b)*///a和b同时为真，非零，则可打印hehe，如果其中有一个为零，不打印
+//		/*printf("hehe");*/
+//	if (a || b )//a和b其中有一个为真就行了
+//	    printf("hehe\n");
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int r = a > b ? a : b;
+//	printf("%d\n", r);
+//	return 0;
+//}
+//int main()
+//{
+//	int a = 1;
+//	int b = 2;
+//	int c = 3;
+//	int d = (a = c + 1, b = c - 2,c=a+b, c += 3, c++,++c);
+//	printf("%d\n", d);
+//	return 0;
+//}
+//下标引用操作符
+//int main()
+//{
+//	int arr[3] = { 1,2,3 };//这里的[]不是操作符，这个只是固定语法形式
+//	arr[2];//这里的[]就是下标引用操作符，其操作数为arr和2
+//	int n = 1;
+//	printf("%d\n",arr[n]);//这里的数组已经确定，已经创建好了，[]里写变量是没问题的
+//	return 0;
+//}
+//函数调用操作符
+int add(int x, int y)
+{
+	return x + y;
+}
+int main()
+{
+	int sum = add(2, 4);//这里的（）就是函数调用操作符，其操作数为add，2和4
+	return 0;
+}
