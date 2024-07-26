@@ -16,7 +16,7 @@
 //	printf("%d\n", sizeof(long long));/*更长整型*/
 //	printf("%d\n", sizeof(float));	/*单精度浮点型*/
 //	printf("%d\n", sizeof(double));/*双精度浮点型*/
-
+//
 //	return 0;
 //}
 //int a = 100;
@@ -322,12 +322,101 @@
 //	return 0;
 //}
 //函数调用操作符
-int add(int x, int y)
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int main()
+//{
+//	int sum = add(2, 4);//这里的（）就是函数调用操作符，其操作数为add，2和4
+//	return 0;
+//}
+//int main()
+//{
+//	auto int a = 0;//auto是自动的意思，a这里为自动变量，一般情况下auto可以省略
+//	return 0;
+//}
+//typedef unsigned int uint;
+//typedef struct node
+//{
+//	int data;
+//	struct node* next;
+//}node;
+//int main()
+//{
+//	unsigned int a1 = 1;
+//	uint a2 = 1;//两者是等效的
+//	struct node n1;
+//	node n2;//两者等效
+//	return 0;
+//}
+
+//static
+//1.修饰局部变量
+//2.修饰全局变量
+//3.修饰函数
+
+//1.修饰局部变量
+/*void test()
 {
-	return x + y;
+	int a = 1;
+	a++;
+	printf("%d ", a);
 }
 int main()
 {
-	int sum = add(2, 4);//这里的（）就是函数调用操作符，其操作数为add，2和4
+	int i = 0;
+	while (i < 10)
+	{
+		test();
+		i++;
+	}
+	return 0;
+}*///结果是生成10个2
+//void test()//void的意思是不用返回，不需要return
+//{
+//	static int a = 1;//static修饰局部变量的时候，局部变量出了作用域，变量不销毁，本质上改变了变量的存储位置（栈区，堆区，静态区）
+//	a++;
+//	printf("%d ", a);//从而影响了变量的生命周期，使其生命周期变长，和整个程序的生命周期一样
+//}
+//int main()
+//{
+//	int i = 0;
+//	while (i < 10)
+//	{
+//		test();
+//		i++;
+//	}
+//	return 0;
+//}//结果生成2~11
+//2.修饰全局变量
+//3.修饰函数：与修饰全局变量基本一致，函数与全局变量一样具有外部链接属性，可以通过extern来声明，使用，但是一旦经static修饰过后
+//函数的外部链接属性就会被改变为内部链接属性，仅限于本文件使用。
+//int main()
+//{
+//	register int a = 3;//建议：将3存放到寄存器中，因为寄存器和CPU的配合处理速度更快
+//	//但是寄存器空间小，所以只是建议，不会一定存储在寄存器中，最终还是编译器说了算
+//	return 0;
+//}
+
+//#define定义标识符常量
+//#define num 100//这个num可以使用，打印，可以作为数组[]里的值，因为他是常量
+
+//#define定义宏
+//#define add(x,y) x+y
+//int main()
+//{
+//	int a= 10;
+//	int b = 20;
+//	printf("%d\n", add(a, b));
+//	return 0;
+//}
+
+int main()
+{
+	int a = 10;//向内存申请4个字节，存储10
+	&a;//取地址操作符
+	printf("%p\n", &a);//打印a的地址，十六进制，每一次重新运行程序，重新存储，地址会变
+	int* p = &a;//把地址存起来，p就是指针变量
 	return 0;
 }
