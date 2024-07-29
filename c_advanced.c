@@ -231,24 +231,46 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	char password[20]= {0};//password[20]为数组类型，里面存放字符，这里初始化，20为存储空间，也可以char password=0，'\0'或者{0}初始化，后面的c和&要相应改动
+//	//切记'0'和0，{0}有区别
+//	printf("请输入密码：");
+//	scanf("%s",password);//这里scanf以字符串的形式打印数组password的字符元素，作为数组的password无需&，因为创建的时候已经以password作为地址头展开空间了
+//	//char password ='0';
+//	//scanf("%c",&password);这是以常规字符形式的操作
+//	int ch = 0;//以int的形式创建，是因为getchar的返回类型字符本质上也是整型，而char类型只能存储1个字节，而如果返回EOF，那大小为4个字节，这时用int创建则可以正常存储
+//	while ((ch = getchar()) != '\n')//getchar将\n及其之前的字符包括空格全部摄取掉，因为scanf只能摄取空格以前的内容，遇到空格停止摄取，
+//		//所以这种方法密码读取和实际密码不一样
+//	
+//	{
+//		;
+//	}
+//	printf("请确认密码(Y/N)");
+//	int ch2 = getchar();//此时输入缓冲区没有字符，只能等待输入
+//	if ('Y' == ch2)
+//		printf("YES");
+//	else
+//		printf("NO");
+//	return 0;
+//}
 int main()
 {
-	char password[20]= {0};//password[20]为数组类型，里面存放字符，这里初始化，20为存储空间，也可以char password=0或者{0}初始化，后面的c和&要相应改动
-	//切记'0'和0，{0}有区别
-	printf("请输入密码：");
-	scanf("%s",password);//这里scanf以字符串的形式打印数组password的字符元素，作为数组的password无需&，因为创建的时候已经以password作为地址头展开空间了
-	//char password ='0';
-	//scanf("%c",&password);这是以常规字符形式的操作
-	int ch = 0;
-	while ((ch = getchar()) != '\n')//getchar将\n及其之前的字符包括空格全部摄取掉
-	{
-		;
-	}
-	printf("请确认密码(Y/N)");
-	int ch2 = getchar();//此时输入缓冲区没有字符，只能等待输入
-	if ('Y' == ch2)
-		printf("YES");
-	else
-		printf("NO");
+	char ch = 's';
+	printf("%zu\n", sizeof('s'));
+	printf("%zu\n", sizeof(char));
+	printf("%zu\n", sizeof(ch));
 	return 0;
 }
+
+//int main()
+//{
+//	char ch = '\0';
+//	while ((ch = getchar() )!= EOF)
+//	{
+//		if (ch < '0' || ch>'9')
+//		    continue;
+//		printf("%c", ch);
+//	}
+//	return 0;
+//}
