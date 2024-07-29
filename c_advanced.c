@@ -254,15 +254,15 @@
 //		printf("NO");
 //	return 0;
 //}
-int main()
-{
-	char ch = 's';
-	printf("%zu\n", sizeof('s'));
-	printf("%zu\n", sizeof(char));
-	printf("%zu\n", sizeof(ch));
-	return 0;
-}
-
+//int main()
+//{
+//	char ch = 's';
+//	printf("%zu\n", sizeof('s'));
+//	printf("%zu\n", sizeof(char));
+//	printf("%zu\n", sizeof(ch));
+//	return 0;
+//}
+//练习题1
 //int main()
 //{
 //	char ch = '\0';
@@ -274,3 +274,73 @@ int main()
 //	}
 //	return 0;
 //}
+
+//练习题2
+//int main()
+//{
+//	int year = 0;
+//	int month = 0;
+//	int date = 0;
+//	scanf("%4d%2d%2d", &year, &month, &date);//%后的数字代表摄取的个数
+//	printf("year=%4d\n", year);
+//	printf("month=%02d\n", month);//02表示摄取两位数字，且如果第一位数字为0也依旧显示，否则如果输入20130125，这里只输出 1
+//	printf("date=%02d\n", date);
+//
+//	return 0;
+//}
+
+//练习题3
+//int main()
+//{
+//	int id = 0;
+//	float math = 0.0f;//double类型的精度高于float，去掉f就是double类型
+//	scanf("%d;%f", &id, &math);
+//	printf("%d;%0.2f", id, math);
+//	return 0;
+//}
+
+//练习题4
+//int main()
+//{
+//	int a = printf("hello world!");
+//	printf("\n%d\n", a);//在%d前面加\n的原因是和打印的hello world换行
+//	return 0;
+//}
+
+//练习题5
+//int main()
+//{
+//	int a, b, c, d = 0;
+//	scanf("%d %d %d %d",&a,&b,&c,&d);
+//	if (a >= b && a >= c && a >= d)
+//		printf("%d\n", a);
+//	else if (b >= a && b >= c && b >= d)
+//		printf("%d\n", b);
+//	else if (c >= a && c >= b && c >= d)
+//		printf("%d\n", c);
+//	else
+//		printf("%d\n", d);
+//	return 0;
+//}
+int main()
+{
+	int arr[4] = { 0 };
+	int i = 0;
+	while (i < 4)
+	{
+		scanf("%d", &arr[i]);//对于数组中的某个元素是需要取地址的
+		i++;
+	}
+	int max = arr[0];
+	int n = 1;
+	while (n < 4)
+	{
+		if (max < arr[n])
+		{ 
+			max = arr[n];
+		}
+		n++;
+	}
+	printf("%d\n", max);
+	return 0;
+}
