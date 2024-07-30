@@ -322,25 +322,170 @@
 //		printf("%d\n", d);
 //	return 0;
 //}
+//int main()
+//{
+//	int arr[4] = { 0 };
+//	int i = 0;
+//	while (i < 4)
+//	{
+//		scanf("%d", &arr[i]);//对于数组中的某个元素是需要取地址的
+//		i++;
+//	}
+//	int max = arr[0];
+//	int n = 1;
+//	while (n < 4)
+//	{
+//		if (max < arr[n])
+//		{ 
+//			max = arr[n];
+//		}
+//		n++;
+//	}
+//	printf("%d\n", max);
+//	return 0;
+//}
+
+//for循环
+
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 10; i++)//for循环中三个部分都可以省略，省略判断部分说明判断会恒成立
+//	{ 
+//		if (i == 5)
+//			//break;
+//			continue;//这里只会跳过后面的printf，跳过后转入i++
+//	    printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+//三个表达式最好不要省略
+//int main()
+//{
+//	int i, j = 0;//这里只有j初始化了，a其实没有被初始化
+//	for (i = 0; i < 3; i++)
+//	{
+//		for (j = 0; j < 3; j++)
+//			printf("hehe\n");//输出9个hehe
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	int i = 0,j = 0;
+//	for (; i < 3; i++)
+//	{
+//		for (; j < 3; j++)
+//			printf("hehe\n");//输出3个hehe
+//	}
+//	return 0;
+//}
+
+//易错点
+
+//int main()
+//{
+//	int x = 0, y = 0;
+//	for (x = 0, y = 0; y = 0; x++, y++)//因为y=0是赋值，而0又是假，所以循环0次
+//		printf("hehe");
+//	return 0;
+//}
+
+//do...while循环
+
+//int main()
+//{
+//	int i = 1;
+//	do
+//	{
+//		if (i == 5)
+//			continue;//死循环
+//		printf("%d\n", i);
+//		i++;
+//	} 
+//	while (i <= 10);
+//	return 0;
+//}
+
+//练习题计算n的阶乘
+//int main()
+//{
+//	int i = 0;
+//	int n = 0;
+//	scanf("%d", &n);
+//	int s = 1;
+//	for (i = 1; i <= n; i++)
+//		s *= i;
+//	printf("%d\n", s);
+//	return 0;
+//}
+//练习题计算1！+2！+3！+...+n!
+//int jiecheng(int x)
+//{
+//	int i = 0;
+//	int s = 1;
+//	for (i = 1; i <= x; i++)
+//		s *= i;
+//	return s;
+//}
+//int main()
+//{
+//	int a = 1;
+//	int n = 0;
+//	int sum = 0;
+//	scanf("%d", &n);
+//	for (a = 1; a <= n; a++)
+//		sum += jiecheng(a);
+//	printf("%d\n", sum);
+//	return 0;
+//}
+
+//方法2
+//int main()
+//{
+//	int i = 1;
+//	int n = 0;
+//	int ret = 1;
+//	int sum = 0;
+//	scanf("%d", &n);
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret *= i;
+//		sum = sum + ret;
+//	}
+//	printf("%d\n", sum);
+//	return 0;
+//}
+
+//练习题二分法查找
+//在一组有序数字中查找某个数字的下标
 int main()
 {
-	int arr[4] = { 0 };
-	int i = 0;
-	while (i < 4)
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14 };
+	int k = 13;
+	int sz = sizeof(arr) / sizeof(arr[0]);//求元素个数
+	int left = 0;
+	int right = sz - 1;
+	while (left <= right)
 	{
-		scanf("%d", &arr[i]);//对于数组中的某个元素是需要取地址的
-		i++;
-	}
-	int max = arr[0];
-	int n = 1;
-	while (n < 4)
-	{
-		if (max < arr[n])
-		{ 
-			max = arr[n];
+		int mid = (left + right) / 2;
+		if (k > arr[mid])
+		{
+			left = mid + 1;//缩小范围
 		}
-		n++;
+		else if (k < arr[mid])
+		{
+			right = mid - 1;
+		}
+		else
+		{
+			printf("找到了，下标是%d", mid);
+			break;
+		}
 	}
-	printf("%d\n", max);
+	if (left > right)
+		printf("找不到");
 	return 0;
 }
