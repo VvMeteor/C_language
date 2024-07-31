@@ -461,31 +461,136 @@
 
 //练习题二分法查找
 //在一组有序数字中查找某个数字的下标
-int main()
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14 };
+//	int k = 13;
+//	int sz = sizeof(arr) / sizeof(arr[0]);//求元素个数
+//	int left = 0;
+//	int right = sz - 1;
+//	while (left <= right)
+//	{
+//		int mid = (left + right) / 2;
+//		if (k > arr[mid])
+//		{
+//			left = mid + 1;//缩小范围
+//		}
+//		else if (k < arr[mid])
+//		{
+//			right = mid - 1;
+//		}
+//		else
+//		{
+//			printf("找到了，下标是%d", mid);
+//			break;
+//		}
+//	}
+//	if (left > right)
+//		printf("找不到");
+//	return 0;
+//}
+
+//练习题三
+//#include<string.h>
+//#include<windows.h>//包含Sleep
+//#include<stdlib.h>//包含system
+////int main()
+//{
+//	char arr1[] = "hello!";
+//	char arr2[] = "######";
+//	int left = 0;
+//	int right = strlen(arr1)-1;
+//	int i = 1;
+//	printf("%s\n", arr2);
+//	Sleep(2000);
+//	system("cls");
+//	while (left <= right)
+//	{
+//		arr2[left] = arr1[left];
+//		arr2[right] = arr1[right];
+//		printf("%s\n", arr2);
+//		left++;
+//		right--;
+//		Sleep(2000);//2000的单位是ms
+//		system("cls");//清空屏幕;system是一个库函数，可以执行系统命令
+//	}
+//	printf("%s", arr2);
+//	return 0;
+//}
+
+//练习题四
+//#include<string.h>
+//int main()
+//{
+//	int i = 0;
+//	char s[20];//密码是123456789
+//	while (i < 3)
+//	{
+//		printf("输入密码：");
+//		scanf("%s", s);
+//		if (strcmp(s, "123456789") == 0)//比较两个字符串是否相等不能用==，要用库函数strcmp，如果相等，返回0
+//		{
+//			printf("登陆成功\n");
+//			break;
+//		}
+//		else
+//			printf("密码错误\n");
+//		i++;
+//	}
+//	if (i ==3)
+//		printf("连续三次输错密码，退出程序\n");
+//	return 0;
+//}
+
+//练习题五：设计小游戏猜数字
+//生成1~100的随机数字，并猜数字
+#include<stdio.h>
+#include<stdlib.h>//srand和rand使用需要引用
+#include<time.h>//引用时间戳time
+void guess()//猜数字游戏的运行函数
 {
-	int arr[] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14 };
-	int k = 13;
-	int sz = sizeof(arr) / sizeof(arr[0]);//求元素个数
-	int left = 0;
-	int right = sz - 1;
-	while (left <= right)
+	int j = 0;
+	int random = rand() % 100 + 1;//生成1~100的随机数，rand是生成0~RAND_MAX的一个随机数，但多次输出的结果固定，所以需要srand
+	while (1)
 	{
-		int mid = (left + right) / 2;
-		if (k > arr[mid])
-		{
-			left = mid + 1;//缩小范围
-		}
-		else if (k < arr[mid])
-		{
-			right = mid - 1;
-		}
+		scanf("%d", &j);
+		if (random < j)
+			printf("猜大了\n");
+		else if (random>j)
+			printf("猜小了\n");
 		else
 		{
-			printf("找到了，下标是%d", mid);
-			break;
+			printf("恭喜你，猜对了！\n");
+			break;//直到猜对了才能跳出循环
 		}
 	}
-	if (left > right)
-		printf("找不到");
+}
+int main()
+{
+	int i = 0;
+	srand((unsigned int)time(NULL));//srand借助时间戳time协助rand生成随机数，time括号里需要一个指针变量，这里NULL给它初始化
+	//time()可以获取时间戳，这是一个随时间变化的值，正好满足srand括号里的要求
+	do
+	{
+		printf("****************\n");
+		printf("*****1.play*****\n");
+		printf("*****1.exit*****\n");
+		printf("****************\n");
+		printf("请选择：");
+		scanf("%d", &i);
+		if (1 == i)
+		{
+			printf("猜数字\n");
+			guess();
+		}
+		else if (0 == i)
+		{
+			printf("退出游戏\n");
+			break;
+		}
+		else
+			printf("错误操作，请重新输入\n");
+
+	} while(i);
 	return 0;
 }
