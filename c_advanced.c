@@ -519,7 +519,7 @@
 //}
 
 //练习题四
-//#include<string.h>
+#include<string.h>
 //int main()
 //{
 //	int i = 0;
@@ -544,53 +544,162 @@
 
 //练习题五：设计小游戏猜数字
 //生成1~100的随机数字，并猜数字
-#include<stdio.h>
-#include<stdlib.h>//srand和rand使用需要引用
-#include<time.h>//引用时间戳time
-void guess()//猜数字游戏的运行函数
+//#include<stdio.h>
+//#include<stdlib.h>//srand和rand使用需要引用
+//#include<time.h>//引用时间戳time
+//void guess()//猜数字游戏的运行函数
+//{
+//	int j = 0;
+//	int random = rand() % 100 + 1;//生成1~100的随机数，rand是生成0~RAND_MAX的一个随机数，但多次输出的结果固定，所以需要srand
+//	while (1)
+//	{
+//		scanf("%d", &j);
+//		if (random < j)
+//			printf("猜大了\n");
+//		else if (random>j)
+//			printf("猜小了\n");
+//		else
+//		{
+//			printf("恭喜你，猜对了！\n");
+//			break;//直到猜对了才能跳出循环
+//		}
+//	}
+//}
+//int main()
+//{
+//	int i = 0;
+//	srand((unsigned int)time(NULL));//srand借助时间戳time协助rand生成随机数，time括号里需要一个指针变量，这里NULL给它初始化
+//	//time()可以获取时间戳，这是一个随时间变化的值，正好满足srand括号里的要求
+//	do
+//	{
+//		printf("****************\n");
+//		printf("*****1.play*****\n");
+//		printf("*****1.exit*****\n");
+//		printf("****************\n");
+//		printf("请选择：");
+//		scanf("%d", &i);
+//		if (1 == i)
+//		{
+//			printf("猜数字\n");
+//			guess();
+//		}
+//		else if (0 == i)
+//		{
+//			printf("退出游戏\n");
+//			break;
+//		}
+//		else
+//			printf("错误操作，请重新输入\n");
+//
+//	} while(i);
+//	return 0;
+//}
+
+//goto语句的使用场景
+//int main()
+//{
+//	char ch[20] = { 0 };
+//	system("shutdown -s -t 60");
+//again:
+//	printf("电脑将在60s后自动关机，请输入：\"我是猪\"取消关机\n");
+//	scanf("%s", ch);
+//	if (strcmp(ch, "我是猪")==0)
+//	{
+//		system("shutdown -a");
+//	}
+//	else
+//		goto again;
+//	return 0;
+//}
+
+//函数：库函数主要是要靠自己读文档学习
+//下面以两个函数为例
+//一.strcpy//Copy a string
+//#include<string.h>
+//int main()
+//{
+//	char arr1[20] = { 0 };
+//	char arr2[] = "hello world!";
+//	strcpy(arr1, arr2);
+//	printf("%s\n", arr1);
+//	return 0;
+//}
+
+//二.memset//将内存中的一块连续空间（即缓冲区）的每个位置都初始化为存储相同的字符
+//#include<memory.h>
+//int main()
+//{
+//	char arr[20] = "hello world!";
+//	memset(arr, 'x', 3);//在arr后边加几就从几+1开始
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//三.自己找的一个库函数：strcoll
+//该函数作用是根据当前环境的区域设置（locale）来比较两个字符串的字典顺序，而不是比较它们的长度。
+//逐字符比较过程中，一旦发现某一对被比较的字符之间不相等时，这一对字符的大小关系即为这一对字符串的大小关系。
+//#include<string.h>
+//int main()
+//{
+//	char a[20] = "nice to meet you!";
+//	char b[30] = "nice to meet you too!";//这里实际上是！与空格之间的比较，前者ASCII值大于后者，所以第一句话大
+//	int i=strcoll(a,b);
+//	if (0 == i)
+//		printf("两句话字典顺序一样");
+//	else if (i<0)
+//		printf("第二句话更大");
+//	else
+//		printf("第一句话更大");
+//	return 0;
+//}
+
+//自定义函数
+//一. 两个数求较大值
+//int max(int x, int y)
+//{
+//	return (x >= y ? x:y);
+//}
+//int main()
+//{
+//	int a = 0, b = 0;
+//	scanf("%d %d", &a, &b);
+//	printf("%d\n", max(a, b));
+//	return 0;
+//}
+
+//二.交换两个整型内容
+//void exchange(int x, int y)
+//{
+//	int i = 0;
+//	i = x;
+//	x = y;
+//	y = i;
+//}
+//int main()
+//{
+//	int a = 0, b = 0;
+//	scanf("%d %d", &a, &b);
+//	exchange(a,b);
+//	printf("%d %d\n", a, b);//会发现a，b没有交换
+//	return 0;
+//}
+////这是因为exchange函数将实参a，b传输到函数里边，会拷贝出一份形参x，y，但是对形参的修改不会影响到实参，所以交换失败
+
+void exchange(int* x, int* y)
 {
-	int j = 0;
-	int random = rand() % 100 + 1;//生成1~100的随机数，rand是生成0~RAND_MAX的一个随机数，但多次输出的结果固定，所以需要srand
-	while (1)
-	{
-		scanf("%d", &j);
-		if (random < j)
-			printf("猜大了\n");
-		else if (random>j)
-			printf("猜小了\n");
-		else
-		{
-			printf("恭喜你，猜对了！\n");
-			break;//直到猜对了才能跳出循环
-		}
-	}
+	int i = *x;
+	*x=*y;
+	*y = i;
 }
 int main()
 {
-	int i = 0;
-	srand((unsigned int)time(NULL));//srand借助时间戳time协助rand生成随机数，time括号里需要一个指针变量，这里NULL给它初始化
-	//time()可以获取时间戳，这是一个随时间变化的值，正好满足srand括号里的要求
-	do
-	{
-		printf("****************\n");
-		printf("*****1.play*****\n");
-		printf("*****1.exit*****\n");
-		printf("****************\n");
-		printf("请选择：");
-		scanf("%d", &i);
-		if (1 == i)
-		{
-			printf("猜数字\n");
-			guess();
-		}
-		else if (0 == i)
-		{
-			printf("退出游戏\n");
-			break;
-		}
-		else
-			printf("错误操作，请重新输入\n");
-
-	} while(i);
+	int a = 0, b = 0;
+	int* p1 = &a;
+	int* p2 = &b;
+	scanf("%d %d", p1, p2);
+	exchange(p1,p2);
+	printf("%d %d\n", a, b);
 	return 0;
 }
+//这个方法和之前不同的是，这里将实际参数的地址传给函数，建立了更为稳固的联系，
+//函数就可以通过地址来找到实际参数，并对其进行修改，完成交换的效果。
