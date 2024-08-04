@@ -176,7 +176,7 @@
 
 //练习题三：二分查找函数
 //int search(int arr[], int k, int sz)//这个地方数组传参int arr[]存放的不是整个数组，而是首元素的地址，
-////本质上是一个指针变量，因为把整个数组拷过来占用空间太大，所以如果把sz放在函数里面来求的方式也是不对的。
+////本质上是一个指针变量，因为把整个数组拷过来占用空间太大，也可以写成int* arr，所以如果把sz放在函数里面来求的方式也是不对的。
 //{
 //	int left = 0;
 //	int right = sz - 1;
@@ -275,11 +275,144 @@
 //}
 
 //函数的声明和定义
+/*int add(int, int);*///函数的声明
+#include"add.h"//函数的声明放add.h的头文件，函数内容放add.c的源文件，这里直接用include把头文件相应的内容拷过来
+//""用于自定义的 ，<>用于库里的头文件
+//这里甚至可以把add.c转化为静态库存储形式，以此来隐藏其具体内容，需要使用的时候只需按下代码：
+//#pragma comment(lib,"add.lib")
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int c = add(a,b);
+//	printf("%d\n", c);
+//	return 0;
+//}
+//int add(int x, int y)//函数的定义
+//{
+//	return x + y;
+//}
+
+//函数的递归
+//练习题1：输入1234，依次打印1 2 3 4
+//void print(unsigned int x)
+//{
+//	if (x > 9)//限制调用自身的条件，不然会栈溢出stack overflow
+//	{
+//		print(x / 10);
+//	}
+//	printf("%d ", x % 10);
+//}
+//int main()
+//{
+//	unsigned int i = 0;
+//	scanf("%u", &i);
+//	print(i);
+//	return 0;
+//}
+
+//练习题2：写一个函数实现strlen的功能
+//int mystrlen(char* arr)
+//{
+//	int a = 0;//创建了临时变量
+//	while (*arr != '\0')
+//	{
+//		a++;
+//		arr++;//找下一个字符，一个字符1个字节
+//	}
+//	return a;
+//}
+//int main()
+//{
+//	char arr[] = "abc";
+//	int len = mystrlen(arr);
+//	printf("%d\n", len);
+//	return 0;
+//}
+
+//不创建临时变量
+//int mystrlen(char* arr)
+//{
+//	if (arr[0] != '\0')
+//	{
+//		return 1 + mystrlen(arr + 1);
+//	}
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	char arr[] = "abcef";
+//	int len = mystrlen(arr);
+//	printf("%d\n", len);
+//	return 0;
+//}
+
+//用函数的递归来写阶乘
+//int f(int a)
+//{
+//	if (a <= 1)
+//		return 1;
+//	else
+//		return a * f(a - 1);
+//}
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	int result = f(a);
+//	printf("%d\n", result);
+//	return 0;
+//}
+
+//求斐波那契数列的第n个数
+//1，1，2，3，5，8，13，21，34，55，89
+//int num = 0;
+//int f(int x)
+//{
+//	if (x == 3)
+//		num++;
+//	if (x <= 2)
+//		return 1;
+//	else
+//		return f(x - 1) + f(x - 2);
+//}
+////当n=30，需要求：
+////       29          28
+////   28     27    27    26
+////  27 26 26 25 26 25 25  24
+////...需要求的东西越来越多，而且是重复计算，这样计算效率太慢
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int ret = f(n);
+//	printf("%d\n", ret);
+//	printf("%d\n", num);
+//	return 0;
+//}
+
+//函数迭代思路求斐波那契第n个数
+int f(int x)
+{
+	int i = 1;
+	int j = 1;
+	int c = 1;
+	int num = 0;
+	while (num<=x-2)
+	{
+		c = i + j;
+		i = j;
+		j = c;
+		num++;
+	}
+	return c;
+}
 int main()
 {
-	int a = 10;
-	int b = 20;
-	int c = a + b;
-	printf("%d\n", c);
+	int n = 0;;
+	scanf("%d", &n);
+	int ret = f(n);
+	printf("%d\n", ret);
 	return 0;
 }
