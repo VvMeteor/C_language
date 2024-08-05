@@ -393,26 +393,166 @@
 //}
 
 //函数迭代思路求斐波那契第n个数
-int f(int x)
-{
-	int i = 1;
-	int j = 1;
-	int c = 1;
-	int num = 0;
-	while (num<=x-2)
-	{
-		c = i + j;
-		i = j;
-		j = c;
-		num++;
-	}
-	return c;
-}
+//int f(int x)
+//{
+//	int i = 1;
+//	int j = 1;
+//	int c = 1;
+//	int num = 0;
+//	while (num<=x-2)
+//	{
+//		c = i + j;
+//		i = j;
+//		j = c;
+//		num++;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int n = 0;;
+//	scanf("%d", &n);
+//	int ret = f(n);
+//	printf("%d\n", ret);
+//	return 0;
+//}
+
+//输入三个数，从大到小输出
+//void exchange(int* x, int* y)
+//{
+//	int* c = *x;
+//	*x = *y;
+//	*y = c;
+//}
+//int main()
+//{
+//	int i = 0;
+//	int j = 0;
+//	int n = 0;
+//	scanf("%d %d %d", &i, &j, &n);
+//	if (i < j)
+//		exchange(&i, &j);
+//	if (i < n)
+//		exchange(&i, &n);
+//	if (j < n)
+//		exchange(&j, &n);
+//	printf("%d %d %d\n", i, j, n);
+//	return 0;
+//}
+
+//输出1~100中3的倍数
+
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 100; i++)
+//		if (i % 3 == 0)
+//			printf("%d ", i);
+//	return 0;
+//}
+
+//求两个数的最大公约数
+
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int i = 0;
+//	scanf("%d %d", &a, &b);
+//	int min = a < b ? b:a;
+//	for (i = min; i >= 1; i--)
+//	{
+//		if (a % i == 0 && b % i == 0)
+//		{
+//			printf("%d\n", i);
+//			break;
+//		}
+//	}
+//	return 0;
+//}
+
+//辗转相除法
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);;
+//	while (a % b)
+//	{
+//		int c = a % b;
+//		a = b;
+//		b = c;
+//	}
+//	printf("%d\n",b);
+//	return 0;
+//}
+
+//输出1`100的数字中9出现的次数
+//9，19，29，39，49，59，69，79，89，99
+//90，91，92，93，94，95，96，97，98，99
+//int main()
+//{
+//	int i = 0;
+//	int c = 0;
+//	for (i = 1; i <= 100; i++)
+//	{
+//		if (i % 10 == 9)//判断个位
+//			c++;
+//		if (i / 10 == 9)//判断十位
+//			c++;
+//	}
+//	printf("%d\n", c);
+//	return 0;
+//}
+
+//计算1-1/2+1/3-1/4+1/5-1/6+...+1/99-1/100
+//#include<math.h>
+//int main()
+//{
+//	int i = 0;
+//	double sum = 0;//输出double类型的，不然1/i后边全是0
+//	for (i = 1; i <= 100; i++)
+//	{
+//		sum = sum - (1.0 / i)*pow(-1,i);//pow是以-1为底，i为指数的函数，这里用1.0是因为double类型需要两边有一边是浮点型
+//	}
+//	printf("%lf\n", sum);
+//	return 0;
+//}
+
+//找出10个整数中的最大值
+ 
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };//这里如果要进行数组创建，后续输入元素的话，就不能int arr[]={0},这样他会默认数组只能存一个元素
+//    //也不能将10改为20，改为20后，其他没填充完的位置默认填0，如果数组元素都是负数，这时候最大值就是系统默认填入的0了
+//	int sz = sizeof(arr) / sizeof(arr[0])-1;
+//	printf("%d\n", sz);
+//	int i = 0;
+//	int max = arr[0];
+//	for (i = 1; i <= sz; i++)
+//	{
+//		if (arr[0] < arr[i])
+//		{
+//			max = arr[i];
+//		}
+//	}
+//	printf("%d\n", max);
+//	return 0;
+//}
+
+//输出9*9乘法表
+
 int main()
 {
-	int n = 0;;
-	scanf("%d", &n);
-	int ret = f(n);
-	printf("%d\n", ret);
+	int i = 0;
+	for (i = 1; i <= 9; i++)//打印9行
+	{
+		int j = 0;
+		for (j = 1; j <= i; j++)//在第几行就打印几列
+		{
+			printf("%d*%d=%-2d ", i, j, i * j);//2的意思是打印两位，没有就用空格替代，-号的意思是左对齐，不加就是默认右对齐
+		}
+		printf("\n");
+	}
 	return 0;
 }
