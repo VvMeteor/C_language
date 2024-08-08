@@ -87,17 +87,246 @@
 
 //二维数组的数组名理解
 
+//int main()
+//{
+//	int arr[3][4];
+//	printf("%zu\n", sizeof(arr));
+//	arr;//这个表示二维数组的首元素地址
+//	//二维数组要把它看作数组的一维数组，每一行数组都是一个元素，那么首元素地址也就是第一行数组的地址了
+//	//而不是第一行数组的第一个元素的地址
+//	printf("%p\n", arr);
+//	printf("%p\n", arr+1);
+//	int i = sizeof(arr) / sizeof(arr[0]);//计算行数
+//	int j = sizeof(arr[0]) / sizeof(arr[0][0]);//计算列数
+//	printf("%d %d\n", i, j);
+//	return 0;
+//}
+
+//三子棋游戏
+#include<stdlib.h>
+#include<time.h>
+#define ROW 3//几子棋控制
+#define COL 3
+
+void menu()//打印菜单
+{
+	printf("*************************\n");
+	printf("******1.play 0.exit******\n");
+	printf("*************************\n");
+}
+void initboard(char board[ROW][COL], int row, int col)//初始化下棋面板
+{
+	int i = 0;
+	for (i = 0; i < row; i++)
+	{
+		int j = 0;
+		for (j = 0; j < col; j++)
+		{
+			board[i][j] = ' ';
+		}
+	}
+}
+void display(char board[ROW][COL], int row, int col)//展示棋盘
+{
+	int i = 0;
+	for (i = 0; i < row; i++)
+	{
+		int j = 0;
+		for (j = 0; j < col; j++)
+		{
+			printf(" %c ", board[i][j]);
+			if (j < col - 1)
+			{
+				printf("|");
+			}
+		}
+		printf("\n");
+		if (i < row - 1)
+		{
+			for (j = 0; j < col; j++)
+			{
+				printf("---");
+				if (j < col - 1)
+				{
+					printf("|");
+				}
+			}
+			printf("\n");
+		}
+	}
+}
+void playermove(char board[ROW][COL], int row, int col)//玩家下棋
+{
+	int x = 0;
+	int y = 0;
+	while (1)
+	{
+		printf("请玩家输入落子坐标:");
+		scanf("%d %d", &x, &y);
+		if (x >= 1 && x <= row && y >= 1 && y <= col)
+		{
+			if (' ' == board[x - 1][y - 1])
+			{
+				board[x - 1][y - 1] = '*';
+				display(board, ROW, COL);
+				break;
+			}
+			else
+				printf("棋位被占用，请重新落子\n");
+		}
+		else
+			printf("落子范围超出棋盘，请重新落子\n");
+		
+	}
+}
+void techmove(char board[ROW][COL], int row, int col)
+{
+	int x = 0;
+	int y = 0;
+	printf("电脑下棋：\n");
+	while (1)
+	{
+		int x = rand() % row ;
+		int y = rand() % col ;
+		if (' ' == board[x][y])
+		{
+			board[x][y] = '#';
+			display(board, ROW, COL);
+			break;
+		}
+	}
+
+}
+int judg1(char board[ROW][COL], int row, int col)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < row; i++)
+	{
+		int c = 0;
+		for (j = 0; j < col; j++)
+		{
+			if ('*' == board[i][j])
+			{
+				c++;
+			}
+		}
+		if (c == row)
+		{
+			return 0;
+		}
+	}
+	for (j = 0; j < col; j++)
+	{
+		int c = 0;
+		for (i = 0; i < row; i++)
+		{
+			if ('*' == board[i][j])
+			{
+				c++;
+			}
+		}
+		if (c == col)
+		{
+			return 0;
+		}
+	}
+	if (board[0][0] == '*' && board[1][1] == '*' && board[2][2] == '*')
+	{
+		return 0;
+	}
+	else if (board[0][2] == '*' && board[1][1] == '*' && board[2][0] == '*')
+	{
+		return 0;
+	}
+}
+int judg2(char board[ROW][COL], int row, int col)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < row; i++)
+	{
+		int c = 0;
+		for (j = 0; j < col; j++)
+		{
+			if ('#' == board[i][j])
+			{
+				c++;
+			}
+		}
+		if (c == row)
+		{
+			return 0;
+		}
+	}
+	for (j = 0; j < col; j++)
+	{
+		int c = 0;
+		for (i = 0; i < row; i++)
+		{
+			if ('#' == board[i][j])
+			{
+				c++;
+			}
+		}
+		if (c == col)
+		{
+			return 0;
+		}
+	}
+	if (board[0][0] == '#' && board[1][1] == '#' && board[2][2] == '#')
+	{
+		return 0;
+	}
+	else if (board[0][2] == '#' && board[1][1] == '#' && board[2][0] == '#')
+	{
+		return 0;
+	}
+}
+void game()
+{
+	char board[ROW][COL] = { 0 };
+	initboard(board, ROW, COL);
+	display(board, ROW, COL);
+	while (1)
+	{
+		playermove(board, ROW, COL);
+		if (judg1(board, ROW, COL) == 0)
+		{
+			printf("玩家胜利！\n");
+			break;
+		}
+		techmove(board, ROW, COL);
+		judg2(board, ROW, COL);
+		if (judg2(board, ROW, COL) == 0)
+		{
+			printf("挑战失败！\n");
+			break;
+		}
+	}
+}
 int main()
 {
-	int arr[3][4];
-	printf("%zu\n", sizeof(arr));
-	arr;//这个表示二维数组的首元素地址
-	//二维数组要把它看作数组的一维数组，每一行数组都是一个元素，那么首元素地址也就是第一行数组的地址了
-	//而不是第一行数组的第一个元素的地址
-	printf("%p\n", arr);
-	printf("%p\n", arr+1);
-	int i = sizeof(arr) / sizeof(arr[0]);//计算行数
-	int j = sizeof(arr[0]) / sizeof(arr[0][0]);//计算列数
-	printf("%d %d\n", i, j);
+	menu();
+	srand((unsigned int)time(NULL));//设置随机数的生成起点
+	int ch = 0;
+	do
+	{
+		printf("请选择是否进行游戏：");
+		scanf("%d", &ch);
+		if (1 == ch)
+		{
+			game();
+		}
+		else if (0==ch)
+		{
+			printf("退出游戏\n");
+			break;
+		}
+		else
+		{
+			printf("选择错误\n");
+		}
+	} while (ch);
 	return 0;
 }
