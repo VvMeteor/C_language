@@ -197,91 +197,135 @@ void techmove(char board[ROW][COL], int row, int col)
 	}
 
 }
-int judg1(char board[ROW][COL], int row, int col)
+//int judg1(char board[ROW][COL], int row, int col)
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < row; i++)
+//	{
+//		int c = 0;
+//		for (j = 0; j < col; j++)
+//		{
+//			if ('*' == board[i][j])
+//			{
+//				c++;
+//			}
+//		}
+//		if (c == row)
+//		{
+//			return 0;
+//		}
+//	}
+//	for (j = 0; j < col; j++)
+//	{
+//		int c = 0;
+//		for (i = 0; i < row; i++)
+//		{
+//			if ('*' == board[i][j])
+//			{
+//				c++;
+//			}
+//		}
+//		if (c == col)
+//		{
+//			return 0;
+//		}
+//	}
+//	if (board[0][0] == '*' && board[1][1] == '*' && board[2][2] == '*')
+//	{
+//		return 0;
+//	}
+//	else if (board[0][2] == '*' && board[1][1] == '*' && board[2][0] == '*')
+//	{
+//		return 0;
+//	}
+//}
+//int judg2(char board[ROW][COL], int row, int col)
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < row; i++)
+//	{
+//		int c = 0;
+//		for (j = 0; j < col; j++)
+//		{
+//			if ('#' == board[i][j])
+//			{
+//				c++;
+//			}
+//		}
+//		if (c == row)
+//		{
+//			return 0;
+//		}
+//	}
+//	for (j = 0; j < col; j++)
+//	{
+//		int c = 0;
+//		for (i = 0; i < row; i++)
+//		{
+//			if ('#' == board[i][j])
+//			{
+//				c++;
+//			}
+//		}
+//		if (c == col)
+//		{
+//			return 0;
+//		}
+//	}
+//	if (board[0][0] == '#' && board[1][1] == '#' && board[2][2] == '#')
+//	{
+//		return 0;
+//	}
+//	else if (board[0][2] == '#' && board[1][1] == '#' && board[2][0] == '#')
+//	{
+//		return 0;
+//	}
+//}
+char judg(char board[ROW][COL], int row, int col)//返回'*'玩家赢，返回’#’电脑赢，返回’Q’平局，返回’c’继续
 {
 	int i = 0;
 	int j = 0;
 	for (i = 0; i < row; i++)
 	{
-		int c = 0;
-		for (j = 0; j < col; j++)
+		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
 		{
-			if ('*' == board[i][j])
-			{
-				c++;
-			}
-		}
-		if (c == row)
-		{
-			return 0;
+			return board[i][0];
 		}
 	}
 	for (j = 0; j < col; j++)
 	{
-		int c = 0;
-		for (i = 0; i < row; i++)
+		if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != ' ')
 		{
-			if ('*' == board[i][j])
-			{
-				c++;
-			}
-		}
-		if (c == col)
-		{
-			return 0;
+			return board[0][j];
 		}
 	}
-	if (board[0][0] == '*' && board[1][1] == '*' && board[2][2] == '*')
+	if (board[0][0] == board[1][1] && board[2][2] ==board[1][1] && board[0][0]!=' ')
 	{
-		return 0;
+		return board[0][0];
 	}
-	else if (board[0][2] == '*' && board[1][1] == '*' && board[2][0] == '*')
+	else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] &&board[1][1]!=' ')
 	{
-		return 0;
+		return board[1][1];
 	}
-}
-int judg2(char board[ROW][COL], int row, int col)
-{
-	int i = 0;
-	int j = 0;
+	int c = 0;
 	for (i = 0; i < row; i++)
 	{
-		int c = 0;
 		for (j = 0; j < col; j++)
 		{
-			if ('#' == board[i][j])
+			if (board[i][j] != ' ')
 			{
 				c++;
 			}
 		}
-		if (c == row)
-		{
-			return 0;
-		}
 	}
-	for (j = 0; j < col; j++)
+	if (c == 9)
 	{
-		int c = 0;
-		for (i = 0; i < row; i++)
-		{
-			if ('#' == board[i][j])
-			{
-				c++;
-			}
-		}
-		if (c == col)
-		{
-			return 0;
-		}
+		return 'Q';
 	}
-	if (board[0][0] == '#' && board[1][1] == '#' && board[2][2] == '#')
-	{
-		return 0;
-	}
-	else if (board[0][2] == '#' && board[1][1] == '#' && board[2][0] == '#')
-	{
-		return 0;
-	}
+	else
+		return 'c';
 }
 void game()
 {
@@ -291,14 +335,21 @@ void game()
 	while (1)
 	{
 		playermove(board, ROW, COL);
-		if (judg1(board, ROW, COL) == 0)
+		if (judg(board, ROW, COL) == '*')
 		{
 			printf("玩家胜利！\n");
 			break;
 		}
+		if (judg(board, ROW, COL) == 'Q')
+		{
+			printf("平局！\n");
+			break;
+		}
+		else
+			;
 		techmove(board, ROW, COL);
-		judg2(board, ROW, COL);
-		if (judg2(board, ROW, COL) == 0)
+		judg(board, ROW, COL);
+		if (judg(board, ROW, COL) == '#')
 		{
 			printf("挑战失败！\n");
 			break;
@@ -330,3 +381,4 @@ int main()
 	} while (ch);
 	return 0;
 }
+
