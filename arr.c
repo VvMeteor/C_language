@@ -103,282 +103,292 @@
 //}
 
 //三子棋游戏
-#include<stdlib.h>
-#include<time.h>
-#define ROW 3//几子棋控制
-#define COL 3
-
-void menu()//打印菜单
-{
-	printf("*************************\n");
-	printf("******1.play 0.exit******\n");
-	printf("*************************\n");
-}
-void initboard(char board[ROW][COL], int row, int col)//初始化下棋面板
-{
-	int i = 0;
-	for (i = 0; i < row; i++)
-	{
-		int j = 0;
-		for (j = 0; j < col; j++)
-		{
-			board[i][j] = ' ';
-		}
-	}
-}
-void display(char board[ROW][COL], int row, int col)//展示棋盘
-{
-	int i = 0;
-	for (i = 0; i < row; i++)
-	{
-		int j = 0;
-		for (j = 0; j < col; j++)
-		{
-			printf(" %c ", board[i][j]);
-			if (j < col - 1)
-			{
-				printf("|");
-			}
-		}
-		printf("\n");
-		if (i < row - 1)
-		{
-			for (j = 0; j < col; j++)
-			{
-				printf("---");
-				if (j < col - 1)
-				{
-					printf("|");
-				}
-			}
-			printf("\n");
-		}
-	}
-}
-void playermove(char board[ROW][COL], int row, int col)//玩家下棋
-{
-	int x = 0;
-	int y = 0;
-	while (1)
-	{
-		printf("请玩家输入落子坐标:");
-		scanf("%d %d", &x, &y);
-		if (x >= 1 && x <= row && y >= 1 && y <= col)
-		{
-			if (' ' == board[x - 1][y - 1])
-			{
-				board[x - 1][y - 1] = '*';
-				display(board, ROW, COL);
-				break;
-			}
-			else
-				printf("棋位被占用，请重新落子\n");
-		}
-		else
-			printf("落子范围超出棋盘，请重新落子\n");
-		
-	}
-}
-void techmove(char board[ROW][COL], int row, int col)
-{
-	int x = 0;
-	int y = 0;
-	printf("电脑下棋：\n");
-	while (1)
-	{
-		int x = rand() % row ;
-		int y = rand() % col ;
-		if (' ' == board[x][y])
-		{
-			board[x][y] = '#';
-			display(board, ROW, COL);
-			break;
-		}
-	}
-
-}
-//int judg1(char board[ROW][COL], int row, int col)
+//#include<stdlib.h>
+//#include<time.h>
+//#define ROW 3//几子棋控制
+//#define COL 3
+//
+//void menu()//打印菜单
+//{
+//	printf("*************************\n");
+//	printf("******1.play 0.exit******\n");
+//	printf("*************************\n");
+//}
+//void initboard(char board[ROW][COL], int row, int col)//初始化下棋面板
+//{
+//	int i = 0;
+//	for (i = 0; i < row; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < col; j++)
+//		{
+//			board[i][j] = ' ';
+//		}
+//	}
+//}
+//void display(char board[ROW][COL], int row, int col)//展示棋盘
+//{
+//	int i = 0;
+//	for (i = 0; i < row; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < col; j++)
+//		{
+//			printf(" %c ", board[i][j]);
+//			if (j < col - 1)
+//			{
+//				printf("|");
+//			}
+//		}
+//		printf("\n");
+//		if (i < row - 1)
+//		{
+//			for (j = 0; j < col; j++)
+//			{
+//				printf("---");
+//				if (j < col - 1)
+//				{
+//					printf("|");
+//				}
+//			}
+//			printf("\n");
+//		}
+//	}
+//}
+//void playermove(char board[ROW][COL], int row, int col)//玩家下棋
+//{
+//	int x = 0;
+//	int y = 0;
+//	while (1)
+//	{
+//		printf("请玩家输入落子坐标:");
+//		scanf("%d %d", &x, &y);
+//		if (x >= 1 && x <= row && y >= 1 && y <= col)
+//		{
+//			if (' ' == board[x - 1][y - 1])
+//			{
+//				board[x - 1][y - 1] = '*';
+//				display(board, ROW, COL);
+//				break;
+//			}
+//			else
+//				printf("棋位被占用，请重新落子\n");
+//		}
+//		else
+//			printf("落子范围超出棋盘，请重新落子\n");
+//		
+//	}
+//}
+//void techmove(char board[ROW][COL], int row, int col)
+//{
+//	int x = 0;
+//	int y = 0;
+//	printf("电脑下棋：\n");
+//	while (1)
+//	{
+//		int x = rand() % row ;
+//		int y = rand() % col ;
+//		if (' ' == board[x][y])
+//		{
+//			board[x][y] = '#';
+//			display(board, ROW, COL);
+//			break;
+//		}
+//	}
+//
+//}
+////int judg1(char board[ROW][COL], int row, int col)
+////{
+////	int i = 0;
+////	int j = 0;
+////	for (i = 0; i < row; i++)
+////	{
+////		int c = 0;
+////		for (j = 0; j < col; j++)
+////		{
+////			if ('*' == board[i][j])
+////			{
+////				c++;
+////			}
+////		}
+////		if (c == row)
+////		{
+////			return 0;
+////		}
+////	}
+////	for (j = 0; j < col; j++)
+////	{
+////		int c = 0;
+////		for (i = 0; i < row; i++)
+////		{
+////			if ('*' == board[i][j])
+////			{
+////				c++;
+////			}
+////		}
+////		if (c == col)
+////		{
+////			return 0;
+////		}
+////	}
+////	if (board[0][0] == '*' && board[1][1] == '*' && board[2][2] == '*')
+////	{
+////		return 0;
+////	}
+////	else if (board[0][2] == '*' && board[1][1] == '*' && board[2][0] == '*')
+////	{
+////		return 0;
+////	}
+////}
+////int judg2(char board[ROW][COL], int row, int col)
+////{
+////	int i = 0;
+////	int j = 0;
+////	for (i = 0; i < row; i++)
+////	{
+////		int c = 0;
+////		for (j = 0; j < col; j++)
+////		{
+////			if ('#' == board[i][j])
+////			{
+////				c++;
+////			}
+////		}
+////		if (c == row)
+////		{
+////			return 0;
+////		}
+////	}
+////	for (j = 0; j < col; j++)
+////	{
+////		int c = 0;
+////		for (i = 0; i < row; i++)
+////		{
+////			if ('#' == board[i][j])
+////			{
+////				c++;
+////			}
+////		}
+////		if (c == col)
+////		{
+////			return 0;
+////		}
+////	}
+////	if (board[0][0] == '#' && board[1][1] == '#' && board[2][2] == '#')
+////	{
+////		return 0;
+////	}
+////	else if (board[0][2] == '#' && board[1][1] == '#' && board[2][0] == '#')
+////	{
+////		return 0;
+////	}
+////}
+//char judg(char board[ROW][COL], int row, int col)//返回'*'玩家赢，返回’#’电脑赢，返回’Q’平局，返回’c’继续
 //{
 //	int i = 0;
 //	int j = 0;
 //	for (i = 0; i < row; i++)
 //	{
-//		int c = 0;
-//		for (j = 0; j < col; j++)
+//		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
 //		{
-//			if ('*' == board[i][j])
-//			{
-//				c++;
-//			}
-//		}
-//		if (c == row)
-//		{
-//			return 0;
+//			return board[i][0];
 //		}
 //	}
 //	for (j = 0; j < col; j++)
 //	{
-//		int c = 0;
-//		for (i = 0; i < row; i++)
+//		if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != ' ')
 //		{
-//			if ('*' == board[i][j])
-//			{
-//				c++;
-//			}
-//		}
-//		if (c == col)
-//		{
-//			return 0;
+//			return board[0][j];
 //		}
 //	}
-//	if (board[0][0] == '*' && board[1][1] == '*' && board[2][2] == '*')
+//	if (board[0][0] == board[1][1] && board[2][2] ==board[1][1] && board[0][0]!=' ')
 //	{
-//		return 0;
+//		return board[0][0];
 //	}
-//	else if (board[0][2] == '*' && board[1][1] == '*' && board[2][0] == '*')
+//	else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] &&board[1][1]!=' ')
 //	{
-//		return 0;
+//		return board[1][1];
 //	}
-//}
-//int judg2(char board[ROW][COL], int row, int col)
-//{
-//	int i = 0;
-//	int j = 0;
+//	int c = 0;
 //	for (i = 0; i < row; i++)
 //	{
-//		int c = 0;
 //		for (j = 0; j < col; j++)
 //		{
-//			if ('#' == board[i][j])
+//			if (board[i][j] != ' ')
 //			{
 //				c++;
 //			}
 //		}
-//		if (c == row)
-//		{
-//			return 0;
-//		}
 //	}
-//	for (j = 0; j < col; j++)
+//	if (c == 9)
 //	{
-//		int c = 0;
-//		for (i = 0; i < row; i++)
-//		{
-//			if ('#' == board[i][j])
-//			{
-//				c++;
-//			}
-//		}
-//		if (c == col)
-//		{
-//			return 0;
-//		}
+//		return 'Q';
 //	}
-//	if (board[0][0] == '#' && board[1][1] == '#' && board[2][2] == '#')
+//	else
+//		return 'c';
+//}
+//void game()
+//{
+//	char board[ROW][COL] = { 0 };
+//	initboard(board, ROW, COL);
+//	display(board, ROW, COL);
+//	while (1)
 //	{
-//		return 0;
-//	}
-//	else if (board[0][2] == '#' && board[1][1] == '#' && board[2][0] == '#')
-//	{
-//		return 0;
+//		playermove(board, ROW, COL);
+//		if (judg(board, ROW, COL) == '*')
+//		{
+//			printf("玩家胜利！\n");
+//			break;
+//		}
+//		if (judg(board, ROW, COL) == 'Q')
+//		{
+//			printf("平局！\n");
+//			break;
+//		}
+//		else
+//			;
+//		techmove(board, ROW, COL);
+//		judg(board, ROW, COL);
+//		if (judg(board, ROW, COL) == '#')
+//		{
+//			printf("挑战失败！\n");
+//			break;
+//		}
 //	}
 //}
-char judg(char board[ROW][COL], int row, int col)//返回'*'玩家赢，返回’#’电脑赢，返回’Q’平局，返回’c’继续
-{
-	int i = 0;
-	int j = 0;
-	for (i = 0; i < row; i++)
-	{
-		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
-		{
-			return board[i][0];
-		}
-	}
-	for (j = 0; j < col; j++)
-	{
-		if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != ' ')
-		{
-			return board[0][j];
-		}
-	}
-	if (board[0][0] == board[1][1] && board[2][2] ==board[1][1] && board[0][0]!=' ')
-	{
-		return board[0][0];
-	}
-	else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] &&board[1][1]!=' ')
-	{
-		return board[1][1];
-	}
-	int c = 0;
-	for (i = 0; i < row; i++)
-	{
-		for (j = 0; j < col; j++)
-		{
-			if (board[i][j] != ' ')
-			{
-				c++;
-			}
-		}
-	}
-	if (c == 9)
-	{
-		return 'Q';
-	}
-	else
-		return 'c';
-}
-void game()
-{
-	char board[ROW][COL] = { 0 };
-	initboard(board, ROW, COL);
-	display(board, ROW, COL);
-	while (1)
-	{
-		playermove(board, ROW, COL);
-		if (judg(board, ROW, COL) == '*')
-		{
-			printf("玩家胜利！\n");
-			break;
-		}
-		if (judg(board, ROW, COL) == 'Q')
-		{
-			printf("平局！\n");
-			break;
-		}
-		else
-			;
-		techmove(board, ROW, COL);
-		judg(board, ROW, COL);
-		if (judg(board, ROW, COL) == '#')
-		{
-			printf("挑战失败！\n");
-			break;
-		}
-	}
-}
+//int main()
+//{
+//	menu();
+//	srand((unsigned int)time(NULL));//设置随机数的生成起点
+//	int ch = 0;
+//	do
+//	{
+//		printf("请选择是否进行游戏：");
+//		scanf("%d", &ch);
+//		if (1 == ch)
+//		{
+//			game();
+//		}
+//		else if (0==ch)
+//		{
+//			printf("退出游戏\n");
+//			break;
+//		}
+//		else
+//		{
+//			printf("选择错误\n");
+//		}
+//	} while (ch);
+//	return 0;
+//}
+
+//数组知识点补充
+
 int main()
 {
-	menu();
-	srand((unsigned int)time(NULL));//设置随机数的生成起点
-	int ch = 0;
-	do
-	{
-		printf("请选择是否进行游戏：");
-		scanf("%d", &ch);
-		if (1 == ch)
-		{
-			game();
-		}
-		else if (0==ch)
-		{
-			printf("退出游戏\n");
-			break;
-		}
-		else
-		{
-			printf("选择错误\n");
-		}
-	} while (ch);
+	int n = 10;//n的类型是int
+	int arr[10] = { 0 };
+	printf("%zu\n", sizeof(arr));
+	printf("%zu\n", sizeof(int[10]));//arr的类型就是int [10]
 	return 0;
 }
-
