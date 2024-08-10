@@ -542,17 +542,223 @@
 
 //输出9*9乘法表
 
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 9; i++)//打印9行
+//	{
+//		int j = 0;
+//		for (j = 1; j <= i; j++)//在第几行就打印几列
+//		{
+//			printf("%d*%d=%-2d ", i, j, i * j);//2的意思是打印两位，没有就用空格替代，-号的意思是左对齐，不加就是默认右对齐
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//二维数组的创建和初始化
+//int main()
+//{
+//	int arr1[2][3] = {1,2,3,4,5,6};//创建一个2行3列的二维数组并初始化
+//	//arr1会依次读取，第一行读三个，第二行读三个，元素不够则填充0
+//	int arr2[2][3] = { {1,2},{3,4} };
+//	//对元素进行分组，放入
+//	int arr3[][3] = { {1,2},{3,4} };
+//	//可以省略行，但是不能省略列
+//	//对于二维数组里的元素的下标，其行和列都是从0开始的
+//	return 0;
+//}
+
+//int main()
+//{
+//	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
+//	int i = 0;
+//	for (i = 0; i <= 2; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j <= 2;j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//冒泡排序方法
+//void sort(int* arr,int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz - 1; i++)//一共会循环sz-1次，因为一共sz个元素，把sz-1个排好了，最后一个自然也ok了
+//	//每循环一次就会将一个元素排在属于他的位置，而且是从大到小，第一次循环一定会把数组元素中最大的排到最后去
+//	//第二次就是第二大的...
+//	{
+//		int j = 0;
+//		for (j = 0; j < sz - 1 - i; j++)//这里是将最大值往后搬运的操作
+//		//j之所以小于sz-1-i是因为，i每循环一次，就有一个元素被排好了，那么本质上就是对前面sz-i个元素的排序
+//		//这里以最大帮运次数作为考虑
+//		{
+//			if (arr[j] > arr[j + 1])//具体的搬运操作
+//			{
+//				int con = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = con;
+//			}
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 1,5,6,10,3,8,5,4,9,0 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	sort(arr, sz);
+//	int n = 0;
+//	for (n = 0; n < sz; n++)
+//	{
+//		printf("%d ", arr[n]);
+//	}
+//	return 0;
+//}
+
+//递归的作业
+//将字符串倒序:一般方法
+//void turn(char arr[], int i, int j)
+//{
+//	if (i < j)
+//	{
+//		char m = arr[i];
+//		arr[i] = arr[j];
+//		arr[j] = m;
+//		i++;
+//		j--;
+//	}
+//}
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	int i = 0;
+//	int sz = sizeof(arr) / sizeof(arr[0])-1;
+//	int j = sz-1;
+//	turn(arr, i, j);
+//	printf("%s", arr);
+//	
+//	return 0;
+//}
+
+//方法2
+//int len(char* arr)
+//{
+//	int i = 0;
+//	int c = 0;
+//	for (i = 0; arr[i] != '\0'; i++)
+//	{
+//		c++;
+//	}
+//	return c;
+//}
+//void turn(char* arr)//仅传一个参数，先将数组第一个元素存储到m，最后一个元素搬到第一个位置，最后一个位置
+// 填充'\0',这样数组交换turn（arr+1）实质上是除去两边元素的中间元素的倒序，最后再将最后一个位置放入m
+//{
+//	int i = 0;
+//	int j = len(arr) - 1;
+//	char m = arr[i];
+//	arr[i] = arr[j];
+//	arr[j] = '\0';
+//	if (len(arr) >= 2)
+//	{
+//		turn(arr + 1);
+//	}
+//	arr[j] = m;
+//}
+//int main()
+//{
+//	char arr[20] = { 0 };
+//	scanf("%s", arr);
+//	printf("%d\n", len(arr));
+//	turn(arr);
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//方法3：
+//int len(char* arr)
+//{
+//	int i = 0;
+//	int c = 0;
+//	for (i = 0; arr[i] != '\0'; i++)
+//	{
+//		c++;
+//	}
+//	return c;
+//}
+//void turn(char* arr, int i, int j)//基本思想同一般方法
+//{
+//	char m = arr[i];
+//	arr[i] = arr[j];
+//	arr[j] = m;
+//	if (i < j)
+//	{
+//		turn(arr, i + 1, j -1);
+//	}
+//}
+//int main()
+//{
+//	char arr[20] = { 0 };
+//	scanf("%s", arr);
+//	int i = 0;
+//	int j = len(arr)-1;
+//	turn(arr,i,j);
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//输入一个非负整数，输出其每一位之和
+//int spsum(int num)
+//{
+//	if (num > 9)
+//	{
+//		return num % 10 + spsum(num / 10);
+//	}
+//	return num;
+//}
+//int main()
+//{
+//	int num = 0;
+//	do
+//	{
+//		scanf("%d", &num);
+//	} while (num < 0);
+//	printf("%d\n", spsum(num));
+//	return 0;
+//}
+
+//递归实现n的k次方
+double power(int n, int k)
+{
+	double ret=0;
+	if (k > 0)
+	{
+		ret = n * power(n, k - 1);
+	}
+	else if (k == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		ret = 1.0 / power(n, -k);
+	}
+	return ret;
+}
 int main()
 {
-	int i = 0;
-	for (i = 1; i <= 9; i++)//打印9行
+	int n = 0;
+	int k = 0;
+	do
 	{
-		int j = 0;
-		for (j = 1; j <= i; j++)//在第几行就打印几列
-		{
-			printf("%d*%d=%-2d ", i, j, i * j);//2的意思是打印两位，没有就用空格替代，-号的意思是左对齐，不加就是默认右对齐
-		}
-		printf("\n");
-	}
+		scanf("%d %d", &n,&k);
+	} while (n < 0);
+	printf("%.2lf\n", power(n, k));
 	return 0;
 }
