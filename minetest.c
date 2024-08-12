@@ -9,7 +9,7 @@ void game()
 	init(mine, ROWS, COLS,'0');
 	init(show, ROWS, COLS,'*');
 	setmine(mine, ROW, COL);
-	//display(mine, ROW, COL);
+	display(mine, ROW, COL);
 	display(show, ROW, COL);
 	findmine(mine,show, ROW, COL);
 }
