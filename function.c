@@ -694,12 +694,13 @@
 //}
 //void turn(char* arr, int i, int j)//基本思想同一般方法
 //{
-//	char m = arr[i];
-//	arr[i] = arr[j];
-//	arr[j] = m;
+//
 //	if (i < j)
 //	{
-//		turn(arr, i + 1, j -1);
+//		char m = arr[i];
+//		arr[i] = arr[j];
+//		arr[j] = m;
+//		turn(arr, i + 1, j - 1);
 //	}
 //}
 //int main()
@@ -734,31 +735,100 @@
 //}
 
 //递归实现n的k次方
-double power(int n, int k)
-{
-	double ret=0;
-	if (k > 0)
-	{
-		ret = n * power(n, k - 1);
-	}
-	else if (k == 0)
-	{
-		return 1;
-	}
-	else
-	{
-		ret = 1.0 / power(n, -k);
-	}
-	return ret;
-}
+//double power(int n, int k)
+//{
+//	double ret=0;
+//	if (k > 0)
+//	{
+//		ret = n * power(n, k - 1);
+//	}
+//	else if (k == 0)
+//	{
+//		return 1;
+//	}
+//	else
+//	{
+//		ret = 1.0 / power(n, -k);
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	do
+//	{
+//		scanf("%d %d", &n,&k);
+//	} while (n < 0);
+//	printf("%.2lf\n", power(n, k));
+//	return 0;
+//}
+
+//作业
+//1.实现输入n级台阶，小米一次可以走一步或两步，输出其爬完台阶的方法种数
+//#include<stdlib.h>
+//#include<time.h>
+//int test(int n)
+//{
+//	if (n > 2)
+//	{
+//		return test(n-1) + test(n-2);
+//	}
+//	else
+//	{
+//		return n;
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	int i = 1;
+//	do
+//	{
+//		printf("n=");
+//		scanf("%d", &n);
+//		if (n > 0 && n <= 30)
+//		{
+//			i = 0;
+//		}
+//	} while (i);
+//	test(n);
+//	printf("方法数=%d\n", test(n));
+//	return 0;
+//}
+
+//删除序列中的指定元素
+
 int main()
 {
 	int n = 0;
-	int k = 0;
-	do
+	int i = 0;
+	int j = 0;
+	int out = 0;
+	int arr[10] = { 0 };
+	int arr1[10] = { 0 };
+	scanf("%d", &n);
+	printf("\n");
+	for (i = 0; i < n; i++)
 	{
-		scanf("%d %d", &n,&k);
-	} while (n < 0);
-	printf("%.2lf\n", power(n, k));
+		scanf("%d", arr+i);
+	}
+	printf("\n");
+	scanf("%d", &out);
+
+	for (i = 0; i < n; i++)
+	{
+		if (out != arr[i])
+		{
+			for ()
+			arr1[i] = arr[i];
+		}
+		else
+			continue;
+	}
+	for (j = 0; j < n; j++)
+	{
+		printf("%d ", arr1[j]);
+	}
 	return 0;
 }
