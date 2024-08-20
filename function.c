@@ -799,36 +799,231 @@
 
 //删除序列中的指定元素
 
+//int main()
+//{
+//	int n = 0;
+//	int i = 0;
+//	int j = 0;
+//	int out = 0;
+//	int arr[10] = { 0 };
+//	scanf("%d", &n);
+//	printf("\n");
+//	for (i = 0; i < n; i++)
+//	{
+//		scanf("%d", arr+i);
+//	}
+//	printf("\n");
+//	scanf("%d", &out);
+//	int c = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		if (out != arr[i])
+//		{
+//			arr[c] = arr[i];
+//			c++;
+//		}
+//		else
+//			continue;
+//	}
+//	for (j = 0; j < c; j++)
+//	{
+//		printf("%d ", arr[j]);
+//	}
+//	return 0;
+//}
+
+//方法2
+
+//int main()
+//{
+//	int n = 0;
+//	int a = 0;
+//	int b = 0;
+//	int out = 0;
+//	int arr[10] = { 0 };
+//	int arr1[10] = { 0 };
+//	scanf("%d", &n);
+//	printf("\n");
+//	for (a = 0; a < n; a++)
+//	{
+//		scanf("%d", arr+a);
+//	}
+//	printf("\n");
+//	scanf("%d", &out);
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		if (out == arr[i])
+//		{
+//			j = i - 1;
+//			int m = arr[i];
+//			arr[i] = arr[i + 1];
+//			arr[i + 1] = m;
+//		}
+//	}
+//	for (b = 0; b <= j; b++)
+//	{
+//		printf("%d ", arr[b]);
+//	}
+//	return 0;
+//}
+
+//输入n个成绩，输出最高分与最低分的差值
+//int max(int* arr,int n)
+//{
+//	int i = 0;
+//	int MAX = *arr;
+//	for (i = 1; i < n; i++)
+//	{
+//		if (arr[i] > MAX)
+//		{
+//			MAX = arr[i];
+//		}
+//	}
+//	return MAX;
+//}
+//int min(int* arr, int n)
+//{
+//	int i = 0;
+//	int MIN = *arr;
+//	for (i = 1; i < n; i++)
+//	{
+//		if (arr[i] < MIN)
+//		{
+//			MIN = arr[i];
+//		}
+//	}
+//	return MIN;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int i = 0;
+//	int arr[10] = { 0 };
+//	scanf("%d", &n);
+//	printf("\n");
+//	for (i = 0; i < n; i++)
+//	{
+//		scanf("%d", arr+i);
+//	}
+//	int c = max(arr,n) - min(arr,n);
+//	printf("%d\n", c);
+//	return 0;
+//}
+
+//字母大小写转化
+
+//int main()
+//{
+//	char ch = 0;
+//	while (scanf("%c", &ch) == 1)//读取成功就返回1，失败返回EOF
+//	{
+//		if (ch >= 'a' && ch <= 'z')
+//		{
+//			printf("%c\n", ch-32);
+//		}
+//		else
+//			printf("%c\n", ch+32);
+//		getchar();//因为输入字符的时候需要输入回车，实际上就输入了一个字符和\n,\n+32就是*号
+//		//scanf("%c")的格式，每次只读取一个字符，所以第一个字符字母会正常读入，输出，第二个字符\n在被读取前被getchar消耗
+//	}
+//	return 0;
+//}
+//
+//int main()
+//{
+//	char ch = 0;
+//	while (scanf("%c", &ch) == 1)//读取成功就返回读取个数，失败返回EOF
+//	{
+//		if (ch >= 'a' && ch <= 'z')
+//		{
+//			printf("%c\n", ch - 32);
+//		}
+//		else if (ch >= 'A' && ch <= 'Z')//严格限制范围，确保其他字符如\n不会进入
+//			printf("%c\n", ch + 32);
+//	}
+//	return 0;
+//}
+//#include<ctype.h>
+//int main()
+//{
+//	char ch = 0;
+//	while (scanf("%c", &ch) == 1)//读取成功就返回读取个数，失败返回EOF
+//	{
+//		if (islower(ch))//判断小写，小写为真
+//		{
+//			printf("%c\n", toupper(ch));//大写转化
+//		}
+//		else if (isupper(ch))//判断大写，大写为真
+//			printf("%c\n", tolower(ch));//小写转化
+//	}
+//	return 0;
+//}
+
+//判断输入是不是字母
+//int main()
+//{
+//	char ch = 0;
+//	while (scanf("%c", &ch) == 1)//也可以不用getchar，在%c前面加个空格，意思是scanf会跳过下一个字符前的所有空白字符
+//	{
+//		if (ch >= 'A' && ch <= 'z')
+//		{
+//			printf("%c is an alphabet.\n",ch);
+//		}
+//		else
+//			printf("%c is not an alphabet.\n", ch);
+//		getchar();
+//	}
+//	return 0;
+//}
+
+//求五位数的变种水仙花数
+
+#include<math.h>
+int judge(int i)
+{
+	int a = 0;
+	int b = 0;
+	int j = 0;
+	int c = 0;
+    for (j=0;j<5;j++)
+	{
+		int m = (int)pow(10, 4 - j);
+		a = i / m;
+		b = i % m;
+		c += a * b;
+	}
+	if (c == i)
+	{
+		return i;
+	}
+	else
+	    return 0;
+	/*int a = i / 10000;
+	int b = i%(10000 * a);
+	int c = i / 1000;
+	int d = i - 1000 * c;
+	int e = i / 100;
+	int f = i - e * 100;
+	int g = i / 10;
+	int h = i - g * 10;
+	if (a * b + c * d + e * f + g * h == i)
+	{
+		return 1;
+	}
+	else
+		return 0;*/
+}
 int main()
 {
-	int n = 0;
 	int i = 0;
-	int j = 0;
-	int out = 0;
-	int arr[10] = { 0 };
-	int arr1[10] = { 0 };
-	scanf("%d", &n);
-	printf("\n");
-	for (i = 0; i < n; i++)
+	for (i = 10000; i <= 99999; i++)
 	{
-		scanf("%d", arr+i);
-	}
-	printf("\n");
-	scanf("%d", &out);
-
-	for (i = 0; i < n; i++)
-	{
-		if (out != arr[i])
+		if (judge(i))
 		{
-			for ()
-			arr1[i] = arr[i];
+			printf("%d ", i);
 		}
-		else
-			continue;
-	}
-	for (j = 0; j < n; j++)
-	{
-		printf("%d ", arr1[j]);
 	}
 	return 0;
 }
