@@ -322,3 +322,212 @@
 //}
 
 //算术转换：见文档记录
+
+//作业
+
+//1.写一个函数返回参数二进制中1的个数
+//int count1(int a)
+//{
+//	int i = 0;
+//	int b = 1;
+//	int c = 0;
+//	for (i = 0; i < 32; i++)
+//	{
+//		if ((a & b) == b)
+//		{
+//			c++;
+//		}
+//		b <<= 1;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	printf("%d\n",count1(a));
+//	return 0;
+//}
+
+//方法2：
+//int count1(int a)//该方法对负数不管用，如-1，进入函数后，除2商0，结束循环
+//{
+//	int c = 0;
+//	while (a)
+//	{
+//		if (a % 2 == 1)
+//		{
+//			c++;
+//		}
+//		a /= 2;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	printf("%d\n",count1(a));
+//	return 0;
+//	
+//}
+
+//int count1(unsigned int a)//稍加改进,加上unsigned int，内存照样存的是-1的补码，
+////但是识别的时候会把它当正数识别，识别成一个很大的数
+//{
+//	int c = 0;
+//	while (a)
+//	{
+//		if (a % 2 == 1)
+//		{
+//			c++;
+//		}
+//		a /= 2;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	unsigned int a = 0;
+//	scanf("%d", &a);
+//	printf("%d\n", count1(a));
+//	return 0;
+//
+//}
+
+//方法3
+//假如n=11
+//1011 - n
+//1010 - n-1
+//1010 - n&(n-1)
+//1010 - n
+//1001 - n-1
+//1000 - n&(n-1)
+//1000 - n
+//0111 - n-1
+//0000 - n&(n-1)
+//n=0
+//运行一次就减少从右到左的一个1，直到n=0；
+//这里的n=n&（n-1）还可以用来判断是不是2的n次方，因为2的n次方一定只有1个1，所以去掉一个1后一定为0
+//if (n=n&(n-1)==0)
+//int count1(int a)
+//{
+//	int c = 0;
+//	while (a)
+//	{
+//		c++;
+//		a = a & (a - 1);
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	unsigned int a = 0;
+//	scanf("%d", &a);
+//	printf("%d\n", count1(a));
+//	return 0;
+//
+//}
+
+//2.求两个整数的二进制不同位的个数
+//int test1(int a, int b)
+//{
+//	int ret = a ^ b;
+//	int c = 0;
+//	//按位异或，相同为0，相异为1
+//	while (ret)//统计1的个数
+//	{
+//		ret = ret & (ret - 1);
+//		c++;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int i = 0;
+//	int c = 0;
+//	scanf("%d%d", &a, &b);
+//	for (i = 0; i < 32; i++)
+//	{
+//		if (((a>>i) & 1) != ((b>>i) & 1))//对比两边不加()括号的时候会出问题，原因是操作符优先级出问题
+//		{
+//			c++;
+//		}
+//	}
+//	printf("%d\n", c);
+//	printf("%d\n", test1(a, b));
+//	return 0;
+//}
+
+//3.获取一个整数的二进制奇数位和偶数位，分别打印
+//void test1(int a)
+//{
+//	int i = 0;
+//	for (i = 0; i < 32; i += 2)
+//	{
+//		int c = (a>>i) & 1;
+//		printf("%d ", c);
+//	}
+//	printf("\n");
+//	for (i = 1; i < 32; i += 2)
+//	{
+//		int c = (a >> i) & 1;
+//		printf("%d ", c);
+//	}
+//	printf("\n");
+//}
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	test1(a);
+//	return 0;
+//}
+
+//4.程序错误，垃圾代码
+
+//int main()
+//{
+//	int c = 1;
+//	int a = (++c) + (++c) + (++c);
+//	printf("%d\n", a);
+//}
+
+//5.超级无敌陷阱题
+//全局变量，静态变量存放在静态区，当它们没有初始化的时候会默认初始化为0；
+//局部变量存放在栈区，不初始化，默认值是随机值
+int a;//0
+int main()
+{
+	a--;//-1
+	if (a > sizeof(a))//算术转化，unsigned int高于int，a转化为无符号整型，-1的补码直接转化得到数值极大的整型，
+		//每一位都是有效数字
+		printf(">");
+	else
+		printf("<");
+	return 0;
+}
+
+//6.打印X
+
+//int main()
+//{
+//	int x = 0;
+//	int i = 0;
+//	int j = 0;
+//	scanf("%d", &x);
+//	for (i = 0; i < x; i++)
+//	{
+//		for (j = 0; j < x; j++)
+//		{
+//			if (j==i || i + j == x - 1)
+//				printf("*");
+//			else
+//				printf(" ");
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
