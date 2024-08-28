@@ -980,26 +980,26 @@
 
 //求五位数的变种水仙花数
 
-#include<math.h>
-int judge(int i)
-{
-	int a = 0;
-	int b = 0;
-	int j = 0;
-	int c = 0;
-    for (j=0;j<5;j++)
-	{
-		int m = (int)pow(10, 4 - j);
-		a = i / m;
-		b = i % m;
-		c += a * b;
-	}
-	if (c == i)
-	{
-		return i;
-	}
-	else
-	    return 0;
+//#include<math.h>
+//int judge(int i)
+//{
+//	int a = 0;
+//	int b = 0;
+//	int j = 0;
+//	int c = 0;
+//    for (j=0;j<5;j++)
+//	{
+//		int m = (int)pow(10, 4 - j);
+//		a = i / m;
+//		b = i % m;
+//		c += a * b;
+//	}
+//	if (c == i)
+//	{
+//		return i;
+//	}
+//	else
+//	    return 0;
 	/*int a = i / 10000;
 	int b = i%(10000 * a);
 	int c = i / 1000;
@@ -1014,16 +1014,81 @@ int judge(int i)
 	}
 	else
 		return 0;*/
-}
+//}
+//int main()
+//{
+//	int i = 0;
+//	for (i = 10000; i <= 99999; i++)
+//	{
+//		if (judge(i))
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
+
+//判断三角形
+//#include<math.h>
+//int main()
+//{
+//	int a = 0, b = 0, c = 0;
+//	scanf("%d%d%d", &a, &b, &c);
+//	double cosc = (pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b);
+//	double cosb = (pow(a, 2) + pow(c, 2) - pow(b, 2)) / (2 * a * c);
+//	double cosa = (pow(c, 2) + pow(b, 2) - pow(a, 2)) / (2 * c * b);
+//	if (a + b > c && a + c > b && b + c > a)
+//	{
+//		if (cosc < 0 || cosa<0 ||cosb<0)
+//		{
+//			printf("钝角三角形\n");
+//		}
+//		else if (cosc == 0 || cosa == 0 || cosb == 0)
+//		{
+//			printf("直角三角形\n");
+//		}
+//		else
+//		{
+//			printf("锐角三角形\n");
+//		}
+//	}
+//	else
+//		printf("无法构成三角形\n");
+//	return 0;
+//
+//}
+
+#include<math.h>
 int main()
 {
-	int i = 0;
-	for (i = 10000; i <= 99999; i++)
+	int a = 0, b = 0, c = 0;
+	scanf("%d%d%d", &a, &b, &c);
+	if (a + b > c && a + c > b && b + c > a)
 	{
-		if (judge(i))
+		if (a == b || a == c || b==c)
 		{
-			printf("%d ", i);
+			if (a == b && a != c)
+			{
+				printf("等腰三角形");
+			}
+			else if (a == c && a != b)
+			{
+				printf("等腰三角形");
+			}
+			else if (b == c && b != a)
+			{
+				printf("等腰三角形");
+			}
+			else
+				printf("等边三角形");
+		}
+		else
+		{
+			printf("普通三角形\n");
 		}
 	}
+	else
+		printf("无法构成三角形\n");
 	return 0;
+
 }
