@@ -1058,37 +1058,136 @@
 //
 //}
 
-#include<math.h>
+//#include<math.h>
+//int main()
+//{
+//	int a = 0, b = 0, c = 0;
+//	scanf("%d%d%d", &a, &b, &c);
+//	if (a + b > c && a + c > b && b + c > a)
+//	{
+//		if (a == b || a == c || b==c)
+//		{
+//			if (a == b && a != c)
+//			{
+//				printf("等腰三角形");
+//			}
+//			else if (a == c && a != b)
+//			{
+//				printf("等腰三角形");
+//			}
+//			else if (b == c && b != a)
+//			{
+//				printf("等腰三角形");
+//			}
+//			else
+//				printf("等边三角形");
+//		}
+//		else
+//		{
+//			printf("普通三角形\n");
+//		}
+//	}
+//	else
+//		printf("无法构成三角形\n");
+//	return 0;
+//
+//}
+
+//喝汽水，1瓶汽水1元，2个空瓶可以换一瓶汽水，给20元，可以买多少汽水(编程实现)
+
+//int main()
+//{
+//	int money = 0;
+//	scanf("%d", &money);
+//	int get = money;//得到的汽水
+//	int empty = money;//空瓶数量
+//	while (empty >=2)
+//	{
+//		get+= empty / 2;
+//		empty = empty / 2 + empty % 2;
+//	}
+//	printf("%d\n", get);
+//	return 0;
+//}
+
+//将一串数字的奇数放在偶数前面，输出
+//int main()
+//{
+//	int arr[4] = { 0 };
+//	int i = 0, j = 4;
+//	for (i = 0; i < 4; i++)
+//	{
+//		scanf("%d", arr + i);
+//	}
+//	i = 0;
+//	while (i < j)
+//	{
+//		if (arr[i] % 2 != 1 && arr[j] % 2 == 1)
+//		{
+//			int tmp = arr[i];
+//			arr[i] = arr[j];
+//			arr[j] = tmp;
+//			i++;
+//			j--;
+//		}
+//		if (arr[i] % 2 == 1)
+//		{
+//			i++;
+//		}
+//		if (arr[j] % 2 != 1)
+//		{
+//			j--;
+//		}
+//	}
+//	for (i = 0; i < 4; i++)
+//	{
+//		printf("%d", *(arr + i));
+//	}
+//	return 0;
+//}
+
+//有序序列合并输出
+
 int main()
 {
-	int a = 0, b = 0, c = 0;
-	scanf("%d%d%d", &a, &b, &c);
-	if (a + b > c && a + c > b && b + c > a)
+	int i = 0, j = 0;
+	int arr1[2],arr2[3];
+	for (i = 0; i < 2; i++)
 	{
-		if (a == b || a == c || b==c)
+		scanf("%d", arr1 + i);
+	}
+	for (j = 0; j < 3; j++)
+	{
+		scanf("%d", arr2 + j);
+	}
+	i = 0, j = 0;
+	while (i < 2 && j < 3)
+	{
+		if (arr1[i] < arr2[j])
 		{
-			if (a == b && a != c)
-			{
-				printf("等腰三角形");
-			}
-			else if (a == c && a != b)
-			{
-				printf("等腰三角形");
-			}
-			else if (b == c && b != a)
-			{
-				printf("等腰三角形");
-			}
-			else
-				printf("等边三角形");
+			printf("%d ", arr1[i]);
+			i++;
 		}
-		else
+		else if (arr1[i] >= arr2[j])
 		{
-			printf("普通三角形\n");
+			printf("%d ", arr2[j]);
+			j++;
 		}
 	}
-	else
-		printf("无法构成三角形\n");
-	return 0;
+	if (i < 2)
+	{
+		for (; i < 2; i++)
+		{
+			printf("%d ", arr1[i]);
+		}
+	}
 
+	else
+	{
+		for (; j < 3;j++)
+		{
+			printf("%d ", arr2[j]);
+		}
+	}
+	return 0;
 }
