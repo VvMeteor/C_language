@@ -353,10 +353,141 @@
 //数组指针
 // int (*p)[10]
 
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	char* ch[5] = {0};
+//	char* (*p)[5] = &ch;//指针数组的数组指针
+//	int* p1 = arr;//p1为数组首元素地址
+//	int (*p2)[10] = &arr;//p2为整个数组的地址，类型为int (*)[10]
+//	return 0;
+//}
+//数组指针不合适的用法
+//int main()
+//{
+//	int arr[] = { 1,2,3 };
+//	int (*p)[3] = &arr;//左边括号里一定要加数量，不然默认为0
+//	int i = 0;
+//	for (i = 0; i < 3; i++)
+//	{
+//		printf("%d ", *(*p + i));//p是指向数组的，*p相当于数组名，而数组名又是首元素地址，*p本质上是首元素地址
+//	}
+//	return 0;
+//}
+//正确用法
+//void print(int(*p)[2], int r, int c)
+//{
+//	int i = 0;
+//	for (i = 0; i < r; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < c; j++)
+//		{
+//			printf("%d ", *(*(p+i) + j));//p的类型是int (*)[3],指向一个整型数组3个元素，加1跳过3个int类型的整个数组
+//			//printf("%d ",p[i][j]);
+//		}
+//		printf("\n");
+//	}
+//}
+//void print2(int* p, int a)
+//{
+//	;
+//}
+//int main()
+//{
+//	int arr[2][3] = { 1,2,3,4,5,6 };
+//	int arr1[3]= { 1,2,3 };
+//	print1(arr1, 3);
+//	print(arr, 2, 3);
+//	return 0;
+//}
+
+//int arr1[5];arr1为整型数组
+//int* arr2[5];arr2为指针数组
+//int (*parr1)[5];parr1是数组指针
+//int (*parr2[10])[5];parr2是存放数组指针的数组，这个数组有十个元素，每一个元素都是数组指针类型int （*）[5]
+
+//数组参数，指针参数
+//一维数组传参
+//void test(int arr[])
+//void test(int* arr)
+//void test1(int* arr[])
+//void test1(int** arr)
+//
+//int main()
+//{
+//	int arr1[10] = { 0 };
+//	int* arr2[10] = { 0 };
+//	test(arr1);
+//	test1(arr2);
+//	return 0;
+//}
+//二维数组传参
+//void test(int arr[][5])
+//void test(int* arr)//错误，存放整型地址的 指针接受不了一个数组
+//void test(int** arr)//错误
+//void test(int (*arr)[5])//正确，因为传过来的是第一行数组的地址
+//int main()
+//{
+//	int arr[3][5] = { 0 };
+//	test(arr);
+//	return 0;
+//}
+
+//一级指针传参
+//void print(int* p)
+//{
+//	;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int* p = &a;
+//	int arr[5] = { 0 };
+//	print(&a);
+//	print(p);
+//	print(arr);
+//	return 0;
+//}
+
+//二级指针传参
+//void print(int** p)
+//{
+//	;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int* p = &a;
+//	int** pp = &p;
+//	int* arr[10];//指针数组
+//	print(pp);
+//	print(&p);
+//	print(arr);
+//	return 0;
+//}
+
+//函数指针
+int add(int x, int y)
+{
+	return x + y;
+}
+void test(int (*p)(int, int))
+{
+	int a = 1, b = 2;
+	int c=(*p)(a, b);
+	printf("%d\n", c);
+}
 int main()
 {
-	int arr[10] = { 0 };
-	int* p1 = arr;//p1为数组首元素地址
-	int (*p2)[10] = &arr;//p2为整个数组的地址，类型为int (*)[10]
+	printf("%p\n", &add);
+	printf("%p\n", add);
+	int (*p1)(int,int) = &add;//p1是函数指针，()表示指向函数，括号里的是函数参数类型，最前面的int是返回类型
+	int (*p2)(int, int) =add;//函数指针的意义是可以随时调用，修改函数
+	printf("%p\n", p1);
+	printf("%p\n", p2);
+	int ret = (*p1)(5, 8);//实际上这里的*没有作用，写多少个都无所谓，和p1(5,8)一样，但是要写的话就加括号，原因是&函数名和函数名都是函数的地址，那p和*p也一样
+	printf("%d\n", ret);
+	test(add);
 	return 0;
 }
