@@ -468,26 +468,115 @@
 //}
 
 //函数指针
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//void test(int (*p)(int, int))
+//{
+//	int a = 1, b = 2;
+//	int c=(*p)(a, b);
+//	printf("%d\n", c);
+//}
+//int main()
+//{
+//	printf("%p\n", &add);
+//	printf("%p\n", add);
+//	int (*p1)(int,int) = &add;//p1是函数指针，()表示指向函数，括号里的是函数参数类型，最前面的int是返回类型
+//	int (*p2)(int, int) =add;//函数指针的意义是可以随时调用，修改函数
+//	printf("%p\n", p1);
+//	printf("%p\n", p2);
+//	int ret = (*p1)(5, 8);//实际上这里的*没有作用，写多少个都无所谓，和p1(5,8)一样，但是要写的话就加括号，原因是&函数名和函数名都是函数的地址，那p和*p也一样
+//	printf("%d\n", ret);
+//	test(add);
+//	return 0;
+//}
+
+
+//C陷阱与缺陷
+//int main()
+//{
+//	(*(void (*)())0)();//这串代码本质是一次函数调用void (*)()是无返回值，无参的函数类型，(void (*)())是强制类型转换，把0强制类型转换为函数指针
+//	//*再进行解引用,调用函数
+//	return 0;
+//}
+//void(* signal(int,void (*)(int)))(int);
+//这是一次函数声明，signal是函数名，参数类型一个是int，一个是函数指针，signal返回值类型也是函数指针类型，signal函数所返回的地址所指向的函数，参数为int，无返回值
+
+//函数指针的用途
+
+//实现一个简单计算器
+void print()
+{
+	printf("*****************************\n");
+	printf("********1.加法 2.减法********\n");
+	printf("********3.乘法 4.除法********\n");
+	printf("********    0.退出   ********\n");
+	printf("*****************************\n");
+
+}
 int add(int x, int y)
 {
 	return x + y;
 }
-void test(int (*p)(int, int))
+int sub(int x, int y)
 {
-	int a = 1, b = 2;
-	int c=(*p)(a, b);
-	printf("%d\n", c);
+	return x - y;
+}
+int mul(int x, int y)
+{
+	return x * y;
+}
+int div(int x, int y)
+{
+	return x / y;
+}
+void calc(int (*p)(int, int))
+{
+	int x = 0, y = 0;
+	printf("请输入操作数：");
+	scanf("%d%d", &x, &y);
+	printf("%d\n",p(x, y));
 }
 int main()
 {
-	printf("%p\n", &add);
-	printf("%p\n", add);
-	int (*p1)(int,int) = &add;//p1是函数指针，()表示指向函数，括号里的是函数参数类型，最前面的int是返回类型
-	int (*p2)(int, int) =add;//函数指针的意义是可以随时调用，修改函数
-	printf("%p\n", p1);
-	printf("%p\n", p2);
-	int ret = (*p1)(5, 8);//实际上这里的*没有作用，写多少个都无所谓，和p1(5,8)一样，但是要写的话就加括号，原因是&函数名和函数名都是函数的地址，那p和*p也一样
-	printf("%d\n", ret);
-	test(add);
+	int input = 0;
+	do
+	{
+		print();
+		printf("请选择：");
+		scanf("%d", &input);
+		switch (input)
+		{
+		case 1:
+		{
+			calc(add);
+			break;
+		}
+		case 2:
+		{
+			calc(sub);
+			break;
+		}
+		case 3:
+		{
+			calc(mul);
+			break;
+		}
+		case 4:
+		{
+			calc(div);
+			break;
+		}
+		case 0:
+		{
+			printf("退出\n");
+			break;
+		}
+		default:
+			printf("err!\n");
+			break;
+		}
+	} while (input);
 	return 0;
 }
