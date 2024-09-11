@@ -506,77 +506,187 @@
 //函数指针的用途
 
 //实现一个简单计算器
-void print()
-{
-	printf("*****************************\n");
-	printf("********1.加法 2.减法********\n");
-	printf("********3.乘法 4.除法********\n");
-	printf("********    0.退出   ********\n");
-	printf("*****************************\n");
+//void print()
+//{
+//	printf("*****************************\n");
+//	printf("********1.加法 2.减法********\n");
+//	printf("********3.乘法 4.除法********\n");
+//	printf("********    0.退出   ********\n");
+//	printf("*****************************\n");
+//
+//}
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int div(int x, int y)
+//{
+//	return x / y;
+//}
+//void calc(int (*p)(int, int))
+//{
+//	int x = 0, y = 0;
+//	printf("请输入操作数：");
+//	scanf("%d%d", &x, &y);
+//	printf("%d\n",p(x, y));
+//}
+//int main()
+//{
+//	int input = 0;
+//	do
+//	{
+//		print();
+//		printf("请选择：");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case 1:
+//		{
+//			calc(add);
+//			break;
+//		}
+//		case 2:
+//		{
+//			calc(sub);
+//			break;
+//		}
+//		case 3:
+//		{
+//			calc(mul);
+//			break;
+//		}
+//		case 4:
+//		{
+//			calc(div);
+//			break;
+//		}
+//		case 0:
+//		{
+//			printf("退出\n");
+//			break;
+//		}
+//		default:
+//			printf("err!\n");
+//			break;
+//		}
+//	} while (input);
+//	return 0;
+//}
 
-}
-int add(int x, int y)
+//函数指针数组的用途
+//void calc(int x,int (*arr[])(int, int))//函数指针数组传参解决
+//{
+//	int i = 0, j = 0;
+//	printf("请输入操作数：\n");
+//	scanf("%d%d", &i, &j);
+//	printf("%d\n",arr[x](i, j));
+//}
+//void print()
+//{
+//	printf("*****************************\n");
+//	printf("********1.加法 2.减法********\n");
+//	printf("********3.乘法 4.除法********\n");
+//	printf("********    0.退出   ********\n");
+//	printf("*****************************\n");
+//
+//}
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int div(int x, int y)
+//{
+//	return x / y;
+//}
+//int main()
+//{
+//	int input = 0;
+//	int (*arr[5])(int, int) = { 0,add,sub,mul,div };//函数指针数组
+//	int (*(*pparr)[5])(int, int) = &arr;//函数指针数组指针
+//	do
+//	{
+//		print();
+//		printf("请选择：");
+//		scanf("%d", &input);
+//		if (input == 0)
+//		{
+//			printf("退出\n");
+//		}
+//		else if (input > 0 && input <= 4)
+//		{
+//			calc(input, arr);
+//		}
+//		else
+//		{
+//			printf("选择错误\n");
+//		}
+//	} while (input);
+//	return 0;
+//}
+
+//回调函数
+
+//普通的冒泡排序:只能比较简单的整型
+//int main()
+//{
+//	int arr[5] = { 5,4,3,2,1 };
+//	int i = 0, j = 0;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	for (i = 0; i < sz - 1; i++)
+//	{
+//		for (j = 0; j < sz - 1 - i; j++)
+//		{
+//			if (arr[j] > arr[j + 1])
+//			{
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//			}
+//		}
+//	}
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+//基于qsort库函数的回调函数应用(暂时以整型为例)
+#include<stdlib.h>
+void qsort(void* base, //指向要排序的数组的第一个对象的指针
+	       size_t num, //数组中元素的个数
+	       size_t width, //数组中每个元素的大小，以字节为单位
+	       int(/*__cdecl*/* compare)(const void* elem1, const void* elem2));
+//比较函数compare的函数指针，这个函数需要两个比较元素，e1>e2返回值大于0，e1=e2返回值等于0，e1<e2返回值小于0
+int compare_int(const void* e1, const void* e2)
 {
-	return x + y;
-}
-int sub(int x, int y)
-{
-	return x - y;
-}
-int mul(int x, int y)
-{
-	return x * y;
-}
-int div(int x, int y)
-{
-	return x / y;
-}
-void calc(int (*p)(int, int))
-{
-	int x = 0, y = 0;
-	printf("请输入操作数：");
-	scanf("%d%d", &x, &y);
-	printf("%d\n",p(x, y));
+	return (*(int*)e1 -*(int*)e2);
 }
 int main()
 {
-	int input = 0;
-	do
+	int arr1[5] = { 5,4,3,2,1 };
+	int sz = sizeof(arr1) / sizeof(arr1[0]);
+	qsort(arr1, sz, 4, compare_int);
+	int i = 0;
+	for (i = 0; i < sz; i++)
 	{
-		print();
-		printf("请选择：");
-		scanf("%d", &input);
-		switch (input)
-		{
-		case 1:
-		{
-			calc(add);
-			break;
-		}
-		case 2:
-		{
-			calc(sub);
-			break;
-		}
-		case 3:
-		{
-			calc(mul);
-			break;
-		}
-		case 4:
-		{
-			calc(div);
-			break;
-		}
-		case 0:
-		{
-			printf("退出\n");
-			break;
-		}
-		default:
-			printf("err!\n");
-			break;
-		}
-	} while (input);
+		printf("%d ", arr1[i]);
+	}
 	return 0;
 }
