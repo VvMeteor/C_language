@@ -669,24 +669,175 @@
 
 //基于qsort库函数的回调函数应用(暂时以整型为例)
 #include<stdlib.h>
-void qsort(void* base, //指向要排序的数组的第一个对象的指针
-	       size_t num, //数组中元素的个数
-	       size_t width, //数组中每个元素的大小，以字节为单位
-	       int(/*__cdecl*/* compare)(const void* elem1, const void* elem2));
-//比较函数compare的函数指针，这个函数需要两个比较元素，e1>e2返回值大于0，e1=e2返回值等于0，e1<e2返回值小于0
-int compare_int(const void* e1, const void* e2)
+//void qsort(void* base, //指向要排序的数组的第一个对象的指针
+//	       size_t num, //数组中元素的个数
+//	       size_t width, //数组中每个元素的大小，以字节为单位
+//	       int(/*__cdecl*/* compare)(const void* elem1, const void* elem2));
+////比较函数compare的函数指针，这个函数需要两个比较元素，e1>e2返回值大于0，e1=e2返回值等于0，e1<e2返回值小于0
+//int compare_int(const void* e1, const void* e2)
+//{
+//	return (*(int*)e1 -*(int*)e2);
+//}
+//int main()
+//{
+//	int arr1[5] = { 5,4,3,2,1 };
+//	int sz = sizeof(arr1) / sizeof(arr1[0]);
+//	qsort(arr1, sz, 4, compare_int);
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr1[i]);
+//	}
+//	return 0;
+//}
+#include<string.h>
+//以结构数据为例
+//struct stu
+//{
+//	char name[20];
+//	int age;
+//};
+//int compare(const void* e1, const void* e2)
+//{
+//	return strcmp(((struct stu*)e1)->name,((struct stu*)e2)->name);
+//}
+//int main()
+//{
+//	struct stu s1[] = { {"zhangsan",18} ,{"lisi",20},{"wangwu",17} };
+//	int sz = sizeof(s1) / sizeof(s1[0]);
+//	qsort(s1, sz, sizeof(s1[0]), compare);
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%s ", (s1[i]).name);
+//	}
+//	return 0;
+//}
+
+//struct stu
+//{
+//	char name[20];
+//	int age;
+//};
+//int compare(const void* e1, const void* e2)
+//{
+//	return ((struct stu*)e1)->age-((struct stu*)e2)->age;
+//}
+//int main()
+//{
+//	struct stu s1[] = { {"zhangsan",18} ,{"lisi",20},{"wangwu",17} };
+//	int sz = sizeof(s1) / sizeof(s1[0]);
+//	qsort(s1, sz, sizeof(s1[0]), compare);
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", (s1[i]).age);
+//	}
+//	return 0;
+//}
+// 
+//升阶的冒泡排序:适用于任何类型,需要自己准备比较函数
+//struct stu
+//{
+//	char name[20];
+//	int age;
+//};
+//int compare(const void* e1, const void* e2)
+//{
+//	return strcmp(((struct stu*)e1)->name,((struct stu*)e2)->name);
+//}
+//int compare_int(const void* e1, const void* e2)
+//{
+//	return (*(int*)e1 - *(int*)e2);
+//}
+//void swap(char* base1, char* base2, int width)
+//{
+//	int i = 0;
+//	for (i = 0; i < width; i++)
+//	{
+//		char tmp = *base1;
+//		*base1 = *base2;
+//		*base2 = tmp;
+//		base1++;
+//		base2++;
+//	}
+//}
+//void bubbling(void* base, int sz, int width, int(*cmp)(const void* e1, const void* e2))
+//{
+//	int flag = 1;
+//	int i = 0, j = 0;
+//	for (i = 0; i < sz - 1; i++)
+//	{
+//		for (j = 0; j < sz - 1 - i; j++)
+//		{
+//			if (cmp((char*)base+j*width, (char*)base + (j+1) * width)>0)
+//			{
+//				swap((char*)base + j * width, (char*)base + (j + 1) * width,width);
+//				flag = 0;
+//			}
+//		}
+//		if (flag == 1)
+//		{
+//			break;
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[] = {9,8,7,6,5,4,3,2,1,0 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int width = sizeof(arr[0]);
+//	struct stu s1[] = { {"zhangsan",18} ,{"lisi",20},{"wangwu",17} };
+//	int sz1 = sizeof(s1) / sizeof(s1[0]);
+//	int width1 = sizeof(s1[0]);
+//	bubbling(s1, sz1, width1, compare);
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//	for (i = 0; i < sz1; i++)
+//	{
+//		printf("%s ", s1[i].name);
+//	}
+//}
+
+//关于void*的补充
+//int main()
+//{
+//	int a = 3;
+//	char* pc = &a;//程序会报警告
+//	void* pv = &a;//void类型的指针是无具体类型的指针，可以接收任何类型的指针
+//	//但是弊端就是不能直接解引用，不能进行+-的操作，因为这两个操作都需要到具体指针类型来决定操作字节
+//	return 0;
+//}
+int add(int x, int y)
 {
-	return (*(int*)e1 -*(int*)e2);
+	;
 }
+#include<string.h>
 int main()
 {
-	int arr1[5] = { 5,4,3,2,1 };
-	int sz = sizeof(arr1) / sizeof(arr1[0]);
-	qsort(arr1, sz, 4, compare_int);
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		printf("%d ", arr1[i]);
-	}
+	int (*p)(int, int) = &add;
+	int a[] = { 1,2,3 };
+	char c[] = { 'a','b','c' };
+	int arr[3][4] = { 0 };
+	printf("%zu\n", sizeof(p));//函数指针大小，只有4或8
+	printf("%zu\n", sizeof(&a+1));//&a+1还是地址，那还是4或8
+
+	printf("%d\n", strlen(c));
+	printf("%d\n", strlen(c+0));//结果一样，传给strlen一样的开始地址，结果就一样
+
+	//printf("%zu\n", strlen(*c));//有问题，strlen接收地址
+
+	printf("%zu\n", sizeof(arr[0]+1));//arr[0]就是第一行数组的数组名，并没有单独放在sizeof里或者取地址，那就是arr[0][0],+1就是第二个元素的地址
+	printf("%zu\n", sizeof(arr+1));//arr并没有单独放在sizeof里或者取地址，那就是arr[0],+1就是第二行数组的地址
+	printf("%zu\n", sizeof(&arr[0] + 1));//第二行数组的地址
+	printf("%zu\n", sizeof(arr[3]));//不会真的去访问，只会根据它的类型输出
+
+
 	return 0;
 }
+
+
