@@ -812,32 +812,69 @@
 //	//但是弊端就是不能直接解引用，不能进行+-的操作，因为这两个操作都需要到具体指针类型来决定操作字节
 //	return 0;
 //}
-int add(int x, int y)
-{
-	;
-}
-#include<string.h>
+//int add(int x, int y)
+//{
+//	;
+//}
+//#include<string.h>
+//int main()
+//{
+//	int (*p)(int, int) = &add;
+//	int a[] = { 1,2,3 };
+//	char c[] = { 'a','b','c' };
+//	int arr[3][4] = { 0 };
+//	printf("%zu\n", sizeof(p));//函数指针大小，只有4或8
+//	printf("%zu\n", sizeof(&a+1));//&a+1还是地址，那还是4或8
+//
+//	printf("%d\n", strlen(c));
+//	printf("%d\n", strlen(c+0));//结果一样，传给strlen一样的开始地址，结果就一样
+//
+//	//printf("%zu\n", strlen(*c));//有问题，strlen接收地址
+//
+//	printf("%zu\n", sizeof(arr[0]+1));//arr[0]就是第一行数组的数组名，并没有单独放在sizeof里或者取地址，那就是arr[0][0],+1就是第二个元素的地址
+//	printf("%zu\n", sizeof(arr+1));//arr并没有单独放在sizeof里或者取地址，那就是arr[0],+1就是第二行数组的地址
+//	printf("%zu\n", sizeof(&arr[0] + 1));//第二行数组的地址
+//	printf("%zu\n", sizeof(arr[3]));//不会真的去访问，只会根据它的类型输出
+//
+//
+//	return 0;
+//}
+
+//struct test
+//{
+//	int num;
+//	char* name;
+//	short date;
+//	char ch[2];
+//	short ba[4];
+//}*p=(struct test*)0x100000;//创建结构体指针p，将整型强制类型转化为结构体test*类型作为地址存储
+////已知结构体test变量大小为20字节
+//int main()
+//{
+//	printf("%p\n", p + 0x1);//0x1就是16进制的1，p是结构体指针，+1跳过一个结构体20字节，结果为0x100014
+//	printf("%p\n", (unsigned long)p + 0x1);//unsigned long为无符号长整型，加1就是加1，结果为0x100001
+//	printf("%p\n", (unsigned int*)p + 0x1);//p被强制类型转化为无符号整型指针，+1跳过整型4字节，结果为0x100004
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a[4] = { 1,2,3,4 };//小端数据存储
+//	//01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 
+//	int* p1 = (int*)(&a + 1);//跳整个数组
+//	int* p2 = (int*)((int)a + 1);//跳一个字节
+//	printf("%x,%x", p1[-1], *p2);//p1[-1]->*(p1-1),-1往前跳1个整型，再读4个字节04 00 00 00；p2是从首元素的第二个字节开始往后读4个字节00 00 00 02
+//	//结果按十六进制打印：4，2000000
+//	return 0;
+//}
+
 int main()
 {
-	int (*p)(int, int) = &add;
-	int a[] = { 1,2,3 };
-	char c[] = { 'a','b','c' };
-	int arr[3][4] = { 0 };
-	printf("%zu\n", sizeof(p));//函数指针大小，只有4或8
-	printf("%zu\n", sizeof(&a+1));//&a+1还是地址，那还是4或8
-
-	printf("%d\n", strlen(c));
-	printf("%d\n", strlen(c+0));//结果一样，传给strlen一样的开始地址，结果就一样
-
-	//printf("%zu\n", strlen(*c));//有问题，strlen接收地址
-
-	printf("%zu\n", sizeof(arr[0]+1));//arr[0]就是第一行数组的数组名，并没有单独放在sizeof里或者取地址，那就是arr[0][0],+1就是第二个元素的地址
-	printf("%zu\n", sizeof(arr+1));//arr并没有单独放在sizeof里或者取地址，那就是arr[0],+1就是第二行数组的地址
-	printf("%zu\n", sizeof(&arr[0] + 1));//第二行数组的地址
-	printf("%zu\n", sizeof(arr[3]));//不会真的去访问，只会根据它的类型输出
-
-
+	int a[3][2] = { (1,2),(3,4),(5,6) };//逗号表达式，实际上存储2，4，6，0，0，0
+	int* p;
+	p = a[0];
+	printf("%d", p[0]);
 	return 0;
 }
-
 
