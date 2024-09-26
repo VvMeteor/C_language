@@ -254,17 +254,100 @@
 //第一个参数非NULL就从str的开头开始找，找到第一个分割标记并保存，是NULL那就从上一个保存的标记点开始找
 //找到的标记替换为\0，返回一个指向该标记的指针
 //该函数会改变原字符串，建议拷贝一份
+//int main()
+//{
+//	char a[] = "123547@hnu.com";
+//	const char b[] = "@.";
+//	char c[30] = { 0 };
+//	strcpy(c, a);
+//	char* ret = NULL;
+//	for (ret=strtok(c, b);
+//		 ret!=NULL;
+//	  	 ret= strtok(NULL, b))
+//		printf("%s\n", ret);
+//	return 0;
+//}
+
+//strerror返回错误码，所对应的错误信息
+//c语言中的库函数执行失败就会返回错误码
+//errno-c语言设置的一个存放全局错误码的变量
+#include<errno.h>
+//int main()
+//{
+//	printf("%s\n", strerror(0));
+//	printf("%s\n", strerror(1));
+//	printf("%s\n", strerror(2));
+//	printf("%s\n", strerror(3));
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	FILE* p = fopen("1.txt", "r");
+//	if (p == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;
+//	}
+//	else;
+//	return 0;
+//}
+
+//memcpy内存拷贝
+//和strncpy相似，适用范围广,拷贝两块独立空间
+//想要实现重叠拷贝，要用到memmove,这里由于编译器的原因，memcpy超量完成了memmove的功能
 int main()
 {
-	char a[] = "123547@hnu.com";
-	const char b[] = "@.";
-	char c[30] = { 0 };
-	strcpy(c, a);
-	char* ret = NULL;
-	for (ret=strtok(c, b);
-		 ret!=NULL;
-	  	 ret= strtok(NULL, b))
-		printf("%s\n", ret);
-	return 0;
+	int a1[] = { 1,2,3,4,5,6,7 };
+	int a2[10] = { 0 };
+	int a3[] = { 2,4,6,8,10 };
+	int a4[] = { 2,4,6,8,10,12,14 };
+
+	memcpy(a2, a1, 28);
+	memcpy(a3+2, a3, 12);
+	memmove(a4+3, a4, 16);
+
+	int i = 0;
+	for (i = 0; i < 7; i++)
+	{
+		printf("%d ", *(a2 + i));
+	}
+	printf("\n");
+	for (i = 0; i < 5; i++)
+	{
+		printf("%d ", *(a3 + i));
+	}
+	printf("\n");
+	for (i = 0; i < 7; i++)
+	{
+		printf("%d ", *(a4 + i));
+	}
 }
 
+//模拟实现
+//void* mymemcpy(void* dest, const void* src, size_t num)
+//{
+//	assert(dest && src);
+//	void* ret = dest;
+//	while (num--)
+//	{
+//		*(char*)dest = *(char*)src;
+//		((char*)dest)++;
+//		((char*)src)++;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int a1[] = { 1,2,3,4,5,6,7 };
+//	int a2[10] = { 0 };
+//	mymemcpy(a2, a1, 28);
+//	int i = 0;
+//	for (i = 0; i < 7; i++)
+//	{
+//		printf("%d ", *(a2 + i));
+//	}
+//}
+
+//memmove
