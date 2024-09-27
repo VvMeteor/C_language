@@ -297,33 +297,33 @@
 //memcpy内存拷贝
 //和strncpy相似，适用范围广,拷贝两块独立空间
 //想要实现重叠拷贝，要用到memmove,这里由于编译器的原因，memcpy超量完成了memmove的功能
-int main()
-{
-	int a1[] = { 1,2,3,4,5,6,7 };
-	int a2[10] = { 0 };
-	int a3[] = { 2,4,6,8,10 };
-	int a4[] = { 2,4,6,8,10,12,14 };
-
-	memcpy(a2, a1, 28);
-	memcpy(a3+2, a3, 12);
-	memmove(a4+3, a4, 16);
-
-	int i = 0;
-	for (i = 0; i < 7; i++)
-	{
-		printf("%d ", *(a2 + i));
-	}
-	printf("\n");
-	for (i = 0; i < 5; i++)
-	{
-		printf("%d ", *(a3 + i));
-	}
-	printf("\n");
-	for (i = 0; i < 7; i++)
-	{
-		printf("%d ", *(a4 + i));
-	}
-}
+//int main()
+//{
+//	int a1[] = { 1,2,3,4,5,6,7 };
+//	int a2[10] = { 0 };
+//	int a3[] = { 2,4,6,8,10 };
+//	int a4[] = { 2,4,6,8,10,12,14 };
+//
+//	memcpy(a2, a1, 28);
+//	memcpy(a3+2, a3, 12);
+//	memmove(a4+3, a4, 16);
+//
+//	int i = 0;
+//	for (i = 0; i < 7; i++)
+//	{
+//		printf("%d ", *(a2 + i));
+//	}
+//	printf("\n");
+//	for (i = 0; i < 5; i++)
+//	{
+//		printf("%d ", *(a3 + i));
+//	}
+//	printf("\n");
+//	for (i = 0; i < 7; i++)
+//	{
+//		printf("%d ", *(a4 + i));
+//	}
+//}
 
 //模拟实现
 //void* mymemcpy(void* dest, const void* src, size_t num)
@@ -350,4 +350,95 @@ int main()
 //	}
 //}
 
-//memmove
+//memmove模拟实现
+//void* mymemmove(void* dest, const void* src, size_t num)
+//{
+//	assert(dest && src);
+//	void* ret = dest;
+//	int s = num;
+//	if (dest < src)
+//	{
+//		while (num--)
+//		{
+//			*(char*)dest = *(char*)src;
+//			dest = (char*)dest + 1;
+//			src = (char*)src + 1;
+//		}
+//	}
+//	else
+//	{
+//		while (num--)
+//		{
+//			*((char*)dest+19) = *((char*)src+19);
+//		}
+//	}
+//	return ret;
+//}
+//int  main()
+//{
+//	int a1[] = { 1,2,3,4,5,6,7,8,9 };
+//	mymemmove(a1, a1+2, 16);
+//	int i = 0;
+//	for (i = 0; i < 9; i++)
+//	{
+//		printf("%d ", a1[i]);
+//	}
+//	return 0;
+//}
+
+//memcmp内存比较
+
+//int main()
+//{
+//	int a1[] = { 1,2,3,4,5,6 };
+//	int a2[] = { 1,3,2 };
+//	int s=memcmp(a1, a2, 12);//a1大于a2返回大于0的值，等于返回0，小于返回负数，比较字节数为12
+//	printf("%d\n", s);
+//	return 0;
+//}
+
+//memset内存设置
+
+//int main()
+//{
+//	char c[] = "hello world";
+//	memset(c, 'x', 5);
+//	printf("%s\n", c);
+//
+//	int a[10] = { 0 };
+//	memset(a, 1, 40);//一个一个字节的改，结果是01 01 01 01十六进制
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d ", a[i]);
+//	}
+//	return 0;
+//}
+
+//模拟实现
+void* mymemset(const void* a1, int v, size_t num)
+{
+	assert(a1);
+	void* ret = a1;
+	while (num--)
+	{
+		*(char*)a1 = v;
+		a1 = (char*)a1 + 1;
+	}
+	return ret;
+}
+int main()
+{
+	char c[] = "hello world";
+	mymemset(c, 'x', 5);
+	printf("%s\n", c);
+
+	int a[10] = { 0 };
+	mymemset(a, 1, 40);//一个一个字节的改，结果是01 01 01 01十六进制
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		printf("%d ", a[i]);
+	}
+	return 0;
+}
