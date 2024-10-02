@@ -169,38 +169,77 @@
 
 //6.´òÓ¡Ñî»ÔÈý½Ç
 
-int main()
-{
-	int i = 0;
-	int j = 0;
-	int arr[5][5] = { 0 };
-	for (i = 0; i < 5; i++)
-	{
-		for (j = 0; j <= i; j++)
-		{
-			if (j == 0 || i==j)
-			{
-				arr[i][j] = 1;
-			}
-			else if (i>1 && j>0)
-			{
-				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
-			}
+//int main()
+//{
+//	int i = 0;
+//	int j = 0;
+//	int arr[5][5] = { 0 };
+//	for (i = 0; i < 5; i++)
+//	{
+//		for (j = 0; j <= i; j++)
+//		{
+//			if (j == 0 || i==j)
+//			{
+//				arr[i][j] = 1;
+//			}
+//			else if (i>1 && j>0)
+//			{
+//				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+//			}
+//
+//		}
+//	}
+//	int n = 0;
+//	for (i = 0; i < 5; i++)
+//	{
+//		for (n = 0; n < 4 - i; n++)
+//		{
+//			printf(" ");
+//		}
+//		for (j = 0; j <= i; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
 
-		}
-	}
-	int n = 0;
-	for (i = 0; i < 5; i++)
-	{
-		for (n = 0; n < 4 - i; n++)
-		{
-			printf(" ");
-		}
-		for (j = 0; j <= i; j++)
-		{
-			printf("%d ", arr[i][j]);
-		}
-		printf("\n");
-	}
-	return 0;
-}
+//7.×Ö·û´®×óÐý×ª
+//×óÐý×ªÒ»¸ö×Ö·ûABCD->BCDA
+//×óÐý×ªÁ½¸ö×Ö·ûABCD->CDAB
+//#include<string.h>
+//int main()
+//{
+//	char src[10] = { 0 };
+//	char dest[20] = { 0 };
+//	int k = 0;
+//	scanf("%s %d", src,&k);
+//	int sz = strlen(src);
+//	memmove(src+sz, src, k);
+//	printf("%s\n", src+k);
+//	return 0;
+//}
+//void leftmove(char arr[], int k)
+//{
+//	while (k--)
+//	{
+//		char m = arr[0];
+//		int i = 1;
+//		while (arr[i])
+//		{
+//			arr[i - 1] = arr[i];
+//			i++;
+//		}
+//		arr[i - 1] = m;
+//	}
+//}
+//int main()
+//{
+//	char a[] = "abcdef";
+//	int k = 0;
+//	scanf("%d", &k);
+//	leftmove(a, k);
+//	printf(a);
+//	return 0;
+//}
