@@ -243,3 +243,191 @@
 //	printf(a);
 //	return 0;
 //}
+
+//杨氏矩阵
+//8.有一个数字矩阵,矩阵的每行从左到右是递增的,矩阵从上到下是递增的,
+//请编写程序在这样的矩阵中查找某个数字是否存在。
+//要求:时间复杂度小于0(N);
+//看看能不能实现多次查找
+//struct coor 
+//{
+//	int x;
+//	int y;
+//};
+//struct coor find(int arr[3][3], int r, int c, int k)
+//{
+//	int x = 0;
+//	int y = c - 1;//表示右上角位置
+//	struct coor p = { -1,-1 };
+//	while (x <= r - 1 && y >= 0)
+//	{
+//		if (arr[x][y] < k)
+//		{
+//			x++;
+//		}
+//		else if (arr[x][y] > k)
+//		{
+//			y--;
+//		}
+//		else
+//		{
+//			p.x = x;
+//			p.y = y;
+//			return p;
+//		}
+//	}
+//	return p;
+//}
+//int main()
+//{
+//	int arr[3][3] = { 1,2,3,2,3,4,3,4,5 };
+//	int k = 0;
+//	scanf("%d", &k);
+//	struct coor p=find(arr, 3, 3, k);
+//	printf("%d %d\n", p.x, p.y);
+//	return 0;
+//}
+
+//9.判断一个字符串是不是由另外一个字符串旋转的来
+//bcdefa就是由abcdef旋转而来，FABCDE不是
+#include<string.h>
+//方法1
+//int is_turn(char arr1[], char arr2[])
+//{
+//	int  len = strlen(arr1);
+//	int i = 0;
+//	for (i = 0; i < len; i++)
+//	{
+//		int j = 0;
+//		char tmp = arr1[0];
+//		for (j = 0; j < len - 1; j++)
+//		{
+//			arr1[j] = arr1[j + 1];
+//		}
+//		arr1[len - 1] = tmp;
+//		if (strcmp(arr1, arr2) == 0)
+//			return 1;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	char pre[] = "abcdef";
+//	char rep[] = "cdefab";
+//	int ret = is_turn(pre, rep);
+//	if (ret == 1)
+//		printf("ok\n");
+//	else
+//		printf("no\n");
+//	return 0;
+//}
+//方法2 
+//int is_turn1(char arr1[], char arr2[])
+//{
+//	size_t len1 = strlen(arr1);
+//	size_t len2 = strlen(arr2);
+//	if (len1 != len2)
+//		return 0;
+//	strncat(arr1, arr1, len1);
+//	if (strstr(arr1, arr2) != NULL)
+//		return 1;
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	char pre[20] = "abcdef";
+//	char rep[] = "cdefab";
+//	int ret = is_turn1(pre, rep);
+//	if (ret == 1)
+//		printf("ok\n");
+//	else
+//		printf("no\n");
+//	return 0;
+//}
+
+//10.实现转置矩阵
+//如1 2 3
+//  4 5 6
+//转成1 4
+//    2 5
+//    3 6
+
+//int main()
+//{
+//	int arr[2][3] = { 1,2,3,4,5,6 };
+//	int i = 0;
+//	for (i = 0; i < 3; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < 2; j++)
+//		{
+//			printf("%d ", arr[j][i]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//11.给定一个二维数组，设计一个高效的峰值查找程序
+
+//int main()
+//{
+//	int arr1[5][6] = { 0 };
+//	int arr2[3][4] = { 1,2,3,4,5,6,14,8,9,10,15,12 };
+//	int i = 0;
+//	for (i = 1; i < 4; i++)
+//	{
+//		int j = 0;
+//		for (j = 1; j < 5; j++)
+//		{
+//			arr1[i][j] = arr2[i - 1][j - 1];
+//		}
+//	}
+//	for (i = 1; i < 4; i++)
+//	{
+//		int j = 0;
+//		for (j = 1; j < 5; j++)
+//		{
+//			if (arr1[i][j] > arr1[i - 1][j]
+//				&& arr1[i][j] > arr1[i - 1][j - 1]
+//				&& arr1[i][j] > arr1[i][j - 1]
+//				&& arr1[i][j] > arr1[i + 1][j - 1]
+//				&& arr1[i][j] > arr1[i + 1][j]
+//				&& arr1[i][j] > arr1[i + 1][j + 1]
+//				&& arr1[i][j] > arr1[i][j + 1])
+//			{
+//				printf("%d %d\n", i, j);
+//			}
+//		}
+//	}
+//	return 0;
+//}
+
+//12.设计程序判断一个方阵是否属于上三角矩阵
+//上三角矩阵是指左上到右下对角线以下元素全为0
+
+//int  main()
+//{
+//	int arr[3][3] = { 1,2,3,0,1,2,0,0,1 };
+//	int i = 0;
+//	int judge = 1;
+//	for (i = 0; i < 3; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < i; j++)
+//		{
+//			if (arr[i][j] != 0)
+//			{
+//				judge = 0;
+//				goto end;
+//			}
+//		}
+//	}
+//end:
+//	if (judge)
+//		printf("YES\n");
+//	else
+//		printf("NO\n");
+//	return 0;
+//}
