@@ -431,3 +431,96 @@
 //		printf("NO\n");
 //	return 0;
 //}
+
+//13.打印爱心
+
+//int  main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	
+//
+//	return 0;
+//}
+
+//14.二维数组查找一个峰值
+//struct point
+//{
+//	int x;
+//	int y;
+//};
+//
+//struct point localmax_find(int arr[5][5], int raw, int col)
+//{
+//	struct point p = { 0 };
+//	int up = 0;
+//	int down = raw - 1;
+//	while (up <= down && up >= 0 && up <= raw - 1 && down>=0 && down <= raw - 1)
+//	{
+//		int mid = (up + down) / 2;
+//		int i = 0;
+//		int j = 0;
+//		int rawmax = 0;
+//		for (i = 0; i < col; i++)
+//		{
+//			if (arr[mid][i] > rawmax)
+//			{
+//				rawmax = arr[mid][i];
+//				p.x = mid;
+//				p.y = i;
+//				j = i;
+//			}
+//		}
+//		if (arr[mid][j] >= arr[mid - 1][j] && arr[mid][j] >= arr[mid + 1][j])
+//			return p;
+//		else if (arr[mid][j] < arr[mid - 1][j])
+//		{
+//			down = mid - 1;
+//		}
+//		else if (arr[mid][j] < arr[mid + 1][j])
+//		{
+//			up = mid + 1;
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[5][5] = { 1,2,4,3,5,4,3,3,2,1,2,4,2,2,1,3,5,2,10,4,1,2,13,10,5};
+//	struct point p=localmax_find(arr, 5, 5);
+//	printf("%d %d\n", p.x, p.y);
+//	return 0;
+//}
+
+//15.输入一串数列，判断是否有序，升序降序都可以
+
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int i = 0;
+	int arr[20] = { 0 };
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+	int flag1 = 0;
+	int flag2 = 0;
+	for (i = 0; i < n-1; i++)
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			flag1 = 1;
+		}
+		else if (arr[i] < arr[i + 1])
+		{
+			flag2 = 1;
+		}
+	}
+	if (flag1 == 1 && flag2 != 1)
+		printf("降序\n");
+	else if (flag2 == 1 && flag1 != 1)
+		printf("升序\n");
+	else
+		printf("有序\n");
+	return 0;
+}
