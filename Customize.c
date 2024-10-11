@@ -33,9 +33,76 @@
 
 //1.4结构体内存对齐
 
-struct stu
+//struct stu
+//{
+//	int i;//第一个成员从偏移量为0的地方开始放，占4个字节
+//	char c1;//char大小为1<8，对齐数取1，取整数倍4，接在i后边
+//	char c2;//同c1，取整数倍5对齐，接在c1后边
+//};
+////总大小占6字节，但是规定总大小必须是成员最大对齐数的整数倍，那就是4的倍数，8
+//int main()
+//{
+//	int i = sizeof(struct stu);//8
+//	printf("%d\n", i);
+//}
+//offsetof返回结构体成员偏移量
+//#include<stddef.h>
+//struct stu
+//{
+//	char c1;
+//	int i;
+//	char c2;
+//};
+//int main()
+//{
+//	int  i = sizeof(struct stu);//12
+//	printf("%d\n", i);
+//
+//	printf("%d\n", offsetof(struct stu, c1));
+//	printf("%d\n", offsetof(struct stu, i));
+//	printf("%d\n", offsetof(struct stu, c2));
+//
+//}
+
+//struct s1
+//{
+//	char x;
+//	double y;
+//	char z;
+//}p1 = {'c',8.2,'n'};//24
+//struct s2
+//{
+//	char a;
+//	struct s1;//s1中成员最大对齐数为8，那么结构体s1以8作为对齐数
+//	char b;
+//};//整个结构体大小以结构体内所有成员对齐数包括嵌套结构体的对齐数的最大值的倍数
+////40
+//int main()
+//{
+//	int i = sizeof(struct s1);
+//	int j = sizeof(struct s2);
+//
+//	printf("%d\n", i);
+//	printf("%d\n", j);
+//
+//	return 0;
+//}
+
+//1.5修改默认对齐数
+//#pragma
+
+#pragma pack(4)//如果输入1则为不对齐，挨着放
+
+struct s1
 {
-	int i;
-	char c1;
-	char c2;
+	char a;
+	double x;
 };
+
+#pragma pack()//修改完后再改回默认对齐数8，但是上面的s1已经以4为对齐数了
+
+int main()
+{
+	printf("%d\n", sizeof(struct s1));//12
+	return 0;
+}
