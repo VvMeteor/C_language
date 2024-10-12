@@ -91,18 +91,91 @@
 //1.5修改默认对齐数
 //#pragma
 
-#pragma pack(4)//如果输入1则为不对齐，挨着放
+//#pragma pack(4)//如果输入1则为不对齐，挨着放
+//
+//struct s1
+//{
+//	char a;
+//	double x;
+//};
+//
+//#pragma pack()//修改完后再改回默认对齐数8，但是上面的s1已经以4为对齐数了
+//
+//int main()
+//{
+//	printf("%d\n", sizeof(struct s1));//12
+//	return 0;
+//}
 
-struct s1
+//1.6结构体传参
+//结构体传参首选传地址，print1直接传结构体，那么函数会临时创建一大块空间，耗时费内存，print2更为高效
+//struct s
+//{
+//	int data[100];
+//	int x;
+//};
+//void print1(struct s s1)
+//{
+//	int i = 0;
+//	for (i = 0; i < 3; i++)
+//	{
+//		printf("%d ", s1.data[i]);
+//	}
+//	printf("%d ", s1.x);
+//}
+//void print2(const struct s* s1)
+//{
+//	int i = 0;
+//	for (i = 0; i < 3; i++)
+//	{
+//		printf("%d ", s1->data[i]);
+//	}
+//	printf("%d ", s1->x);
+//}
+//int main()
+//{
+//	struct s s1 = { {1,2,3},100 };
+//	print1(s1);
+//	printf("\n");
+//	print2(&s1);
+//
+//	return 0;
+//}
+
+//1.7结构体实现位段的能力
+//位段只能在结构体内实现，可以节省空间
+//位段必须是整形家族成员，位段成员后面有一个冒号和数字
+//struct s
+//{
+//	//位段的内存分配，看类型，int，一次性先开4个字节
+//	int a : 2;//本来int类型需要32个bit，这里位段的作用就是用2个bit来存储a的值，原因在于有些值它本身具有明显的范围，不需要那么多空间来存储
+//	int b : 4;
+//	int c : 10;
+//	//还剩16bit，不够存d了，再开辟4个字节来存下d
+//	int d : 30;
+//};
+//int main()
+//{
+//	printf("%d", sizeof(struct s));//8
+//	return 0;
+//}
+
+//1.8位段如何分配内存
+
+struct s
 {
-	char a;
-	double x;
+	//开辟8bit
+	char  a : 3;
+	char  b : 4;
+	//余1bit，开辟8bit，如果c直接使用新开辟的8bit，舍弃余下的1bit，则下面还需要再开8bit，如果将1bit也使用掉，那么16个bit刚好够用
+	char  c : 5;
+	char  d : 4;
+	//事实证明需要3个字节，c直接使用新开辟的8bit，舍弃余下的1bit
 };
-
-#pragma pack()//修改完后再改回默认对齐数8，但是上面的s1已经以4为对齐数了
-
 int main()
 {
-	printf("%d\n", sizeof(struct s1));//12
+	struct s s1 = { 0 };
+	printf("%d\n", sizeof(struct s));
+
 	return 0;
 }
