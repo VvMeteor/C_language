@@ -82,3 +82,127 @@
 //}
 
 //1.4动态内存函数多次使用容易造成内存空间碎片化，内存空间利用率会降低
+
+//二.常见的动态内存错误
+
+//2.1对NULL指针的解引用操作
+
+//int main()
+//{
+//	int* p = (int*)malloc(40);
+//	*p = 20;//这里缺乏对p的一个确认就直接解引用了是有风险的，正确操作应该在前面加if判断
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//2.2对动态开辟的内存空间越界访问
+
+//int main()
+//{
+//	int* p = (int*)malloc(40);
+//	if (p == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;
+//	}
+//	int i = 0;
+//	for (i = 0; i <= 10; i++)
+//	{
+//		*(p + i) = i;
+//	}//形成越界访问
+//  free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//2.3对非动态开辟的内存使用free释放
+
+//int main()
+//{
+//	int a = 0;
+//	int* p = &a;
+//	int i = 0;
+//	//...
+//
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//2.4使用free释放动态内存空间的一部分空间
+
+//int main()
+//{
+//	int* p = (int*)malloc(40);
+//	if (p == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;
+//	}
+//	int i = 0;
+//	for (i = 0; i <= 10; i++)
+//	{
+//		*p = i;
+//		p++;
+//	}
+//	free(p);//此时free的p已经指向最后四个字节了
+//	p = NULL;
+//	return 0;
+//}
+
+//2.5使用free多次释放同一块动态内存空间
+
+//int main()
+//{
+//	int* p = (int*)malloc(40);
+//	if (p == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;
+//	}
+//	free(p);
+//	//...
+//	free(p);
+//	return 0;
+//}
+
+//2.6动态内存开辟忘记释放(内存泄露)
+
+//2.6.1
+//int test()
+//{
+//	int* p = (int*)malloc(40);
+//	int i = 0;
+//	scanf("%d", &i);
+//	if (i == 5)
+//	{
+//		return 1;
+//	}
+//	free(p);
+//	p = NULL;
+//}
+//int main()
+//{
+//	test();//该函数就有动态内存空间无法执行释放的危险
+//	return 0;
+//}
+
+//2.6.2
+
+//int* test()
+//{
+//	int* p = (int*)malloc(40);
+//	if (p == NULL)
+//	{
+//		return p;
+//	}
+//	//...
+//	return p;
+//}
+//int main()
+//{
+//	int* ret = test();
+//	//后续忘记释放test里面开辟的动态内存空间
+//	return 0;
+//}
