@@ -206,3 +206,51 @@
 //	//后续忘记释放test里面开辟的动态内存空间
 //	return 0;
 //}
+
+//三.动态内存管理题目
+
+//3.1题目1
+//void getmemory(char* p)//形参
+//{
+//	p = (char*)malloc(100);//改变形参不会对实参有影响，且函数调用结束，p自动销毁，造成内存泄漏
+//}
+//void test()
+//{
+//	char* str = NULL;
+//	getmemory(str);//实参
+//	strcpy(str, "hello world!");//str依旧是NULL
+//	printf("%s\n", str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+//改进
+//void getmemory(char** p)
+//{
+//	*p = (char*)malloc(100);
+//}
+//void test()
+//{
+//	char* str = NULL;
+//	getmemory(&str);
+//	strcpy(str, "hello world!");
+//	printf("%s\n", str);
+//	free(str);
+//	str = NULL;
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+
+//3.2题目2
+
+//int* test()
+//{
+//	int x;
+//	return &x;//x是局部变量，出函数立马销毁，它的地址成为野指针，上面那个不会是因为malloc开辟的动态内容空间的地址是不会销毁的
+//}
