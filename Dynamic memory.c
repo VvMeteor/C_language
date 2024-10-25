@@ -254,3 +254,53 @@
 //	int x;
 //	return &x;//x是局部变量，出函数立马销毁，它的地址成为野指针，上面那个不会是因为malloc开辟的动态内容空间的地址是不会销毁的
 //}
+
+//3.2题目3
+//返回栈空间地址的问题
+//char* getmemory()
+//{
+//	char p[] = "hello world";
+//	return p;
+//}
+//void test()
+//{
+//	char* str = NULL;
+//	getmemory(str);//问题在于getmemory函数确实可以把地址带过来，但是走出函数无论是p，还是数组作为临时变量都会被销毁
+//	printf(str);//无法打印出指定内容
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
+//int* test()
+//{
+//	int a = 10;
+//	return &a;
+//}
+//int main()
+//{
+//	int* p=test();
+//	printf("hehe\n");
+//	printf("%d", *p);//能够打印10的时候说明之前那块空间没被修改覆盖
+//	return 0;
+//}
+
+//3.3题目4
+void test()
+{
+	char* p = (char*)malloc(40);
+	strcpy(p, "hello world");
+	free(p);
+	//这里加上p=NULL才是严谨的
+	if (p != NULL)
+	{
+		strcpy(p, "hello world");//这里的问题在于malloc开辟的空间虽然释放了，但是p指针仍能够找到这块空间，但是无权访问，成了野指针
+		printf(p);
+	}
+}
+int main()
+{
+	test();
+	return 0;
+}
