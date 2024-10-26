@@ -438,10 +438,12 @@
 //{
 //	int n = 0;
 //	scanf("%d", &n);
-//	
+//	int i = 0;
+//	for (i=0;i<n)
 //
 //	return 0;
 //}
+
 
 //14.二维数组查找一个峰值
 //struct point
@@ -492,35 +494,203 @@
 //}
 
 //15.输入一串数列，判断是否有序，升序降序都可以
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int i = 0;
+//	int arr[20] = { 0 };
+//	for (i = 0; i < n; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	int flag1 = 0;
+//	int flag2 = 0;
+//	for (i = 0; i < n-1; i++)
+//	{
+//		if (arr[i] > arr[i + 1])
+//		{
+//			flag1 = 1;
+//		}
+//		else if (arr[i] < arr[i + 1])
+//		{
+//			flag2 = 1;
+//		}
+//	}
+//	if (flag1 == 1 && flag2 != 1)
+//		printf("降序\n");
+//	else if (flag2 == 1 && flag1 != 1)
+//		printf("升序\n");
+//	else
+//		printf("有序\n");
+//	return 0;
+//}
 
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int i = 0;
-	int arr[20] = { 0 };
-	for (i = 0; i < n; i++)
-	{
-		scanf("%d", &arr[i]);
-	}
-	int flag1 = 0;
-	int flag2 = 0;
-	for (i = 0; i < n-1; i++)
-	{
-		if (arr[i] > arr[i + 1])
-		{
-			flag1 = 1;
-		}
-		else if (arr[i] < arr[i + 1])
-		{
-			flag2 = 1;
-		}
-	}
-	if (flag1 == 1 && flag2 != 1)
-		printf("降序\n");
-	else if (flag2 == 1 && flag1 != 1)
-		printf("升序\n");
-	else
-		printf("有序\n");
-	return 0;
-}
+//16.求两个正整数的最大公约数和最大公倍数的和
+
+//int main()
+//{
+//	int a = 0, b = 0;
+//	scanf("%d%d", &a, &b);
+//	int max, min;
+//	int n, m;
+//	max = a > b ? a : b;
+//	min = a <= b ? a : b;
+//
+//	int i = 0;
+//	for (i = min; i<=min; i--)
+//	{
+//		if (max % i == 0 && min % i == 0)
+//		{
+//			n = i;
+//		}
+//		break;
+//	}
+//	for (i =max; i >= max; i++)
+//	{
+//		if (i % max == 0 && i % min == 0)
+//		{
+//			m = i;
+//		}
+//		break;
+//	}
+//	printf("%d\n", n + m);
+//	return 0;
+//}//时间复杂度过高
+
+//改进版
+//辗转相除求最大公约数
+//两数相乘除最大公约数得最小公倍数
+//int main()
+//{
+//	int a = 0, b = 0;
+//	scanf("%d%d", &a, &b);
+//	int max, min;
+//	int n, m;
+//	max = a > b ? a : b;
+//	min = a <= b ? a : b;
+//	int i = max;
+//	int  j = min;
+//	while (i % j)
+//	{
+//		int tmp = i % j;
+//		i = j;
+//		j = tmp;
+//	}
+//	n = j;
+//	m = max * min / j;
+//	printf("%d\n", n + m);
+//	return 0;
+//}
+
+//17.打印空心正方形
+//方法一笨方法
+//int main()
+//{
+//	int  input = 0;
+//	scanf("%d", &input);
+//	int i = 0;
+//	for (i = 0; i < input; i++)
+//	{
+//		printf("* ");
+//	}
+//	printf("\n");
+//	int ret = input;
+//	while (input - 2)
+//	{
+//		printf("* ");
+//		int j = 0;
+//		for (j = 0; j < (ret-2)*2; j++)
+//		{
+//			printf(" ");
+//		}
+//		printf("* ");
+//		printf("\n");
+//		input--;
+//	}
+//	for (i = 0; i < ret; i++)
+//	{
+//		printf("* ");
+//	}
+//	return 0;
+//}
+
+//方法二
+//int main()
+//{
+//	int input = 0;
+//	scanf("%d", &input);
+//	int i = 0,j=0;
+//	for (i = 0; i < input; i++)
+//	{
+//		for (j = 0; j < input; j++)
+//		{
+//			if (i == 0 || i == input - 1 || j == 0 || j == input-1)
+//			{
+//				printf("* ");
+//			}
+//			else
+//			{
+//				printf("  ");
+//			}
+//		}
+//		printf("\n");
+//	}
+//
+//	return 0;
+//}
+
+//18.打印箭型图案
+//输入3
+//      *
+//    **
+//  ***
+//****
+//  ***
+//    **
+//      *
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int i = 0;
+//	int col = 1;
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n - i; j++)
+//		{
+//			printf("  ");
+//		}
+//		int num = 0;
+//		for (num = 0; num < col; num++)
+//		{
+//			printf("*");
+//		}
+//		col++;
+//		printf("\n");
+//	}
+//	for (i = 0; i < n + 1; i++)
+//	{
+//		printf("*");
+//	}
+//	printf("\n");
+//	col = n;
+//	for (i = n; i >0; i--)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n - i+1; j++)
+//		{
+//			printf("  ");
+//		}
+//		int num = 0;
+//		for (num = 0; num < col; num++)
+//		{
+//			printf("*");
+//		}
+//		col--;
+//		printf("\n");
+//	}
+//	return 0;
+//}
