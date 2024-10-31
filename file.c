@@ -150,6 +150,37 @@
 //	return 0;
 //}
 
+//struct s
+//{
+//	char name[20];
+//	int age;
+//	float high;
+//};
+//int main()
+//{
+//	struct s peo = { 0 };
+//	FILE* pf = fopen("test.txt", "rb");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//二进制方式读
+//	fread(&peo, sizeof(struct s), 1, pf);//第一个参数为读出的东西存放的地址，他的大小（byte），要读的个数，从哪个文件流读
+//	printf("%s %d %f\n", peo.name, peo.age, peo.high);
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//scanf - 是针对标准输入的格式化输入语句
+//printf - 是针对标准输出的格式化输出语句
+
+//fscanf - 是针对所有输入流的格式化输入语句
+//fprintf - 是针对所有输出流的格式化输出语句
+
+//sprintf - 把一个格式化的数据转化成字符串
+//sscanf - 把一个字符串转化为格式化数据
 struct s
 {
 	char name[20];
@@ -158,17 +189,13 @@ struct s
 };
 int main()
 {
-	struct s peo = { 0 };
-	FILE* pf = fopen("test.txt", "rb");
-	if (pf == NULL)
-	{
-		perror("fopen");
-		return 1;
-	}
-	//二进制方式读
-	fread(&peo, sizeof(struct s), 1, pf);//第一个参数为读出的东西存放的地址，他的大小（byte），要读的个数，从哪个文件流读
-	printf("%s %d %f\n", peo.name, peo.age, peo.high);
-	fclose(pf);
-	pf = NULL;
+	struct s peo = {"zhangsan",18,175.0f};
+	struct s tmp = { 0 };
+	char buf[100] = { 0 };
+	sprintf(buf, "%s %d %f", peo.name, peo.age, peo.high);
+	//""zhangsan 18 175.000000"
+	printf("%s\n", buf);
+	sscanf(buf, "%s %d %f", peo.name, &(peo.age), &(peo.high));
+	printf("%s %d %f", peo.name, peo.age, peo.high);
 	return 0;
 }
