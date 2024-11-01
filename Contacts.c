@@ -36,6 +36,7 @@ int main()
 			qsortcon(&con);
 			break;
 		case EXIT:
+			savecon(&con);
 			free(con.data);
 			con.data = NULL;
 			printf("�˳�ͨѶ¼\n");
