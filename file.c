@@ -181,21 +181,59 @@
 
 //sprintf - 把一个格式化的数据转化成字符串
 //sscanf - 把一个字符串转化为格式化数据
-struct s
-{
-	char name[20];
-	int age;
-	float high;
-};
-int main()
-{
-	struct s peo = {"zhangsan",18,175.0f};
-	struct s tmp = { 0 };
-	char buf[100] = { 0 };
-	sprintf(buf, "%s %d %f", peo.name, peo.age, peo.high);
-	//""zhangsan 18 175.000000"
-	printf("%s\n", buf);
-	sscanf(buf, "%s %d %f", peo.name, &(peo.age), &(peo.high));
-	printf("%s %d %f", peo.name, peo.age, peo.high);
-	return 0;
-}
+//struct s
+//{
+//	char name[20];
+//	int age;
+//	float high;
+//};
+//int main()
+//{
+//	struct s peo = {"zhangsan",18,175.0f};
+//	struct s tmp = { 0 };
+//	char buf[100] = { 0 };
+//	sprintf(buf, "%s %d %f", peo.name, peo.age, peo.high);
+//	//""zhangsan 18 175.000000"
+//	printf("%s\n", buf);
+//	sscanf(buf, "%s %d %f", peo.name, &(peo.age), &(peo.high));
+//	printf("%s %d %f", peo.name, peo.age, peo.high);
+//	return 0;
+//}
+
+//文件的随机读写
+//fseek - 根据文件指针的位置和偏移量来定位文件指针
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;
+//	}
+//	//读文件
+//	//定位文件指针
+//	fseek(pf, 2, SEEK_SET);//SEEK_SET是文件首位
+//	int ch = fgetc(pf);
+//	printf("%c %d\n", ch,ftell(pf));//ftell返回当前文件指针偏移量
+//
+//	fseek(pf, 2, SEEK_CUR);//SEEK_CUR是文件指针当前位置
+//	ch = fgetc(pf);
+//	printf("%c %d\n", ch, ftell(pf));
+//
+//	fseek(pf, -2, SEEK_END);//SEEK_END是文件末位
+//	ch = fgetc(pf);
+//	printf("%c %d\n", ch, ftell(pf));
+//
+//	rewind(pf);//将文件指针恢复至起始位置
+//	ch = fgetc(pf);
+//	printf("%c %d\n", ch, ftell(pf));
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//文本文件和二进制文件
+//数据文件根据组织形式分为文本文件和二进制文件
+//数据在内存中以二进制形式存储，如果不加转化输出到外存，就是二进制文件
+//经ASCII值转化以字符形式存储的就是文件形式
