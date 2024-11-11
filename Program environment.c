@@ -125,13 +125,107 @@
 
 //4.#undef
 //取消一个宏定义
-#define M 100
+//#define M 100
+//int main()
+//{
+//	printf("%d\n", M);
+//#undef M
+//	//printf("%d\n", M);//这里的M识别不了
+//
+//	return 0;
+//}
+
+//5.条件编译
+//#define _DEBUG_
+//
+//int main()
+//{
+//	int i = 0;
+//	int arr[10] = { 0 };
+//	for (i = 0; i < 10; i++)
+//	{
+//		arr[i] = i;
+//#ifdef _DEBUG_//当_DEBUG_定义有效时进行
+//		printf("%d\n", arr[i]);
+//#endif
+//	}
+//	return 0;
+//}
+
+//5.1多分支条件编译
+//#define M 5
+//int main()
+//{
+//#if 1//常量表达式
+//	printf("hehe\n");
+//#endif
+//
+//#if M>5
+//	printf(">\n");
+//#elif M==5
+//	printf("=\n");
+//#else
+//	printf("<\n");
+//#endif
+//	return 0;
+//}
+
+//5.2判断一个符号是否被定义
+//#define MAX 1
+//int main()
+//{
+//#if defined(MAX)
+//	printf("hehe\n");//如果MAX被定义了就打印
+//#endif
+//#if !defined(M)
+//	printf("haha\n");//如果M没被定义了就打印
+//#endif
+//
+//#ifdef MAX
+//	printf("hehe\n");//如果MAX被定义了就打印
+//#endif
+//#ifndef M
+//	printf("haha\n");//如果M没被定义了就打印
+//#endif
+//	return 0;
+//}
+
+//5.3避免头文件被多次包含
+//头文件被多次包含会造成代码冗余
+//#ifndef _TEST_H_
+//#define _TEST_H_
+//int add(int x, int y);
+//#endif//这样写头文件只会被包含一次
+//或者
+//#pragma once
+//int add(int x, int y);
+
+//宏offsetof返回结构体成员偏移量
+//#include<stddef.h>
+struct s
+{
+	char c1;
+	int i;
+	char c2;
+};
+//int main()
+//{
+//  struct s s1={0};
+//	printf("%d\n", offsetof(struct s, c1));
+//	printf("%d\n", offsetof(struct s, i));
+//	printf("%d\n", offsetof(struct s, c2));
+//
+//	return 0;
+//}
+//模拟实现offsetof
+#define OFFSETOF(type,name) (size_t)&(((type*)0)->name)
+//将0强制类型转化为一个类型的指针形式，相当于这个类型的起始地址为0，再找到成员，取出它们的地址，以size_t的类型输出即为偏移量
 int main()
 {
-	printf("%d\n", M);
-#undef M
-	//printf("%d\n", M);//这里的M识别不了
+	struct s s1 = { 0 };
+	printf("%u\n", OFFSETOF(struct s, c1));
+	printf("%u\n", OFFSETOF(struct s, i));
+	printf("%u\n", OFFSETOF(struct s, c2));
 
 	return 0;
 }
-
