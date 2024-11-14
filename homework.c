@@ -694,3 +694,101 @@
 //	}
 //	return 0;
 //}
+
+//19.面试成绩
+//输入7组成绩，去掉最高分和最低分，剩下的取平均
+//int Max(int* arr,int size)
+//{
+//	int i = 0;
+//	int max = arr[i];
+//	for (i = 0; i < size; i++)
+//	{
+//		if (max <= arr[i])
+//		{
+//			max = arr[i];
+//		}
+//	}
+//	return max;
+//}
+//int Min(int* arr, int size)
+//{
+//	int i = 0;
+//	int min = arr[i];
+//	for (i = 0; i < size; i++)
+//	{
+//		if (min >= arr[i])
+//		{
+//			min = arr[i];
+//		}
+//	}
+//	return min;
+//}
+//int main()
+//{
+//	int i = 0;
+//	int sum = 0;
+//	int arr[7] = { 0 };
+//	double score = 0;
+//	for (i = 0; i < 7; i++)
+//	{
+//		int tmp = 0;
+//		scanf("%d", &tmp);
+//		arr[i] = tmp;
+//	}
+//	for (i = 0; i < 7; i++)
+//	{
+//		sum += arr[i];
+//	}
+//	score = (sum - Max(arr, 7) - Min(arr, 7)) / 5;
+//	printf("%.2f\n", score);
+//	return 0;
+//}
+
+//int main()
+//{
+//	int n = 0;
+//	int sum = 0;
+//	int max = 0;
+//	int min = 100;
+//	int score = 0;
+//	while (scanf("%d", &score) == 1)
+//	{
+//		n++;
+//		sum += score;
+//		if (max < score)
+//		{
+//			max = score;
+//		}
+//		if (min > score)
+//		{
+//			min = score;
+//		}
+//		if (n == 7)
+//		{
+//			printf("%0.2lf\n", (sum - max - min) / 5.0);
+//			break;
+//		}
+//	}
+//	return 0;
+//}
+
+//20.联合体
+//int main()
+//{
+//	union
+//	{
+//		short k;
+//		char i[2];
+//	}*p,a;
+//	p = &a;
+//	p->i[0] = 0x39;
+//	p->i[1] = 0x38;
+//	printf("%x\n", a.k);
+//	//低内存->高内存
+//	//字节1   字节2
+//	//0x39    0x38
+//	//小端存储读取数据
+//	//0x38 0x39
+//	//3839
+//}
+
